@@ -1,0 +1,9 @@
+{
+    "1": {
+        "requirement_id": "1",
+        "technical_feasibility": "High",
+        "financial_feasibility": "Medium",
+        "time_feasibility": "Low",
+        "comments": "The requirement is technically feasible but may require additional budget and time."
+    }
+}
