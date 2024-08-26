@@ -3,6 +3,17 @@ from Devid import Devid
 from UIUXDesignerAgent import UIUXDesignerAgent
 from RequirementsAnalystAgent import RequirementsAnalystAgent
 from CEOAgent import CEOAgent
+from agency_swarm import set_openai_key
+
+import os
+from dotenv import load_dotenv
+
+# Cargar variables de entorno desde el archivo .env
+load_dotenv()
+
+# Obtener la clave API de OpenAI desde la variable de entorno
+openai_api_key = os.getenv('OPENAI_API_KEY')
+set_openai_key(openai_api_key)
 
 ceo = CEOAgent()
 requirements_analyst = RequirementsAnalystAgent()
