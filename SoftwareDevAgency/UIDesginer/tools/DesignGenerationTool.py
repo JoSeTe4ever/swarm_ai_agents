@@ -45,3 +45,12 @@ class DesignGenerationTool(BaseTool):
 
         except Exception as e:
             return f"An error occurred while generating the design: {str(e)}"
+        
+    def save_image_to_disk(image_response):
+        if image_response.status_code == 200:
+            with open('generated_image.png', 'wb') as f:
+                f.write(image_response.content)
+            print("Image downloaded and saved as 'generated_image.png'")
+        else:
+            print("Failed to download the image")
+            raise Exception("Failed to download the image")

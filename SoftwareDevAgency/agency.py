@@ -44,7 +44,7 @@ agency = Agency([ui_designer, []],
 # comment and uncomment 
 def test_dalle_image_generator():
     # Create an instance of the tool with a sample prompt
-    dalle_tool = DesignGenerationTool(design_prompt="A surreal landscape with floating islands", return_base64=False)
+    dalle_tool = DesignGenerationTool(design_prompt="Create a Product page on a Ecommerce application. Take any decision you need to take without extra input.", return_base64=False)
     
     # Run the tool to generate the image
     image_url = dalle_tool.run()
