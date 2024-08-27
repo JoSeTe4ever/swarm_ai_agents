@@ -1,0 +1,863 @@
+[
+    {
+        "id": "asst_QimGz9k6BqTRd6KoFrVPxqVF",
+        "created_at": 1724708974,
+        "description": "The CEO agent oversees the entire software development process and coordinates between agents within the SoftwareDevAgency. It ensures seamless communication and collaboration between the Requirements Analyst, UI/UX Designer, and Developer agents.",
+        "instructions": "# SoftwareDevAgency Manifesto\n\n## Mission\nThe SoftwareDevAgency is dedicated to streamlining the software development process by efficiently gathering requirements, creating AI-generated UI/UX designs, and implementing these designs in React. Our goal is to leverage AI technology to enhance creativity and productivity while maintaining high standards of quality.\n\n## Working Environment\nThe agency operates in a collaborative environment where each agent has a distinct role but works together towards a common goal. The CEO agent coordinates all activities and ensures seamless communication between agents.\n\n## Goals\n- Efficiently gather and analyze software requirements.\n- Use AI to generate innovative and user-friendly UI/UX designs.\n- Implement designs in React with precision and efficiency.\n- Foster a collaborative and creative working environment.\n\n# CEO Agent Instructions\n\nYou are the CEO agent responsible for overseeing the entire software development process within the SoftwareDevAgency. Your primary role is to coordinate between the Requirements Analyst, UI/UX Designer, and Developer agents to ensure smooth operation and collaboration.\n\n### Primary Instructions:\n1. Initiate communication with the Requirements Analyst agent to gather and analyze software requirements.\n2. Coordinate with the UI/UX Designer agent to create AI-generated designs based on the gathered requirements.\n3. Ensure the Developer agent implements the designs in React efficiently and accurately.\n4. Monitor the progress of each agent and ensure they are aligned with the agency's mission and goals.\n5. Facilitate communication between agents to resolve any issues or bottlenecks in the development process.\n6. Report the overall progress and any significant updates to the user.",
+        "metadata": {},
+        "model": "gpt-4o-2024-08-06",
+        "name": "CEOAgent",
+        "object": "assistant",
+        "tools": [
+            {
+                "function": {
+                    "name": "SendMessage",
+                    "description": "Use this tool to facilitate direct, synchronous communication between specialized agents within your agency. When you send a message using this tool, you receive a response exclusively from the designated recipient agent. To continue the dialogue, invoke this tool again with the desired recipient agent and your follow-up message. Remember, communication here is synchronous; the recipient agent won't perform any tasks post-response. You are responsible for relaying the recipient agent's responses back to the user, as the user does not have direct access to these replies. Keep engaging with the tool for continuous interaction until the task is fully resolved. Do not send more than 1 message at a time.",
+                    "parameters": {
+                        "$defs": {
+                            "recipient": {
+                                "enum": [
+                                    "RequirementsAnalystAgent",
+                                    "UIUXDesignerAgent",
+                                    "Devid"
+                                ],
+                                "title": "recipient",
+                                "type": "string"
+                            }
+                        },
+                        "properties": {
+                            "my_primary_instructions": {
+                                "description": "Please repeat your primary instructions step-by-step, including both completed and the following next steps that you need to perform. For multi-step, complex tasks, first break them down into smaller steps yourself. Then, issue each step individually to the recipient agent via the message parameter. Each identified step should be sent in separate message. Keep in mind, that the recipient agent does not have access to these instructions. You must include recipient agent-specific instructions in the message or additional_instructions parameters.",
+                                "title": "My Primary Instructions",
+                                "type": "string"
+                            },
+                            "recipient": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/$defs/recipient"
+                                    }
+                                ],
+                                "description": "RequirementsAnalystAgent: The Requirements Analyst agent is responsible for gathering and analyzing software requirements within the SoftwareDevAgency. It communicates with the CEO and UI/UX Designer agents to ensure accurate and comprehensive requirement analysis.\nUIUXDesignerAgent: The UI/UX Designer agent is responsible for generating innovative and user-friendly UI/UX designs using DALL-E 3 within the SoftwareDevAgency. It collaborates with the CEO, Requirements Analyst, and Developer agents to ensure designs align with project requirements and goals.\nDevid: Devid is an AI software engineer capable of performing advanced coding tasks.\n"
+                            },
+                            "message": {
+                                "description": "Specify the task required for the recipient agent to complete. Focus on clarifying what the task entails, rather than providing exact instructions.",
+                                "title": "Message",
+                                "type": "string"
+                            },
+                            "message_files": {
+                                "anyOf": [
+                                    {
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "type": "array"
+                                    },
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "default": null,
+                                "description": "A list of file ids to be sent as attachments to this message. Only use this if you have the file id that starts with 'file-'.",
+                                "examples": [
+                                    "file-1234",
+                                    "file-5678"
+                                ],
+                                "title": "Message Files"
+                            },
+                            "additional_instructions": {
+                                "default": null,
+                                "description": "Any additional instructions or clarifications that you would like to provide to the recipient agent.",
+                                "title": "Additional Instructions",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "message",
+                            "my_primary_instructions",
+                            "recipient"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            }
+        ],
+        "response_format": "auto",
+        "temperature": 0.3,
+        "tool_resources": {
+            "code_interpreter": null,
+            "file_search": null
+        },
+        "top_p": 1.0
+    },
+    {
+        "id": "asst_SnWfbCTrrGrmVFvlf72sSfKz",
+        "created_at": 1724708974,
+        "description": "The Requirements Analyst agent is responsible for gathering and analyzing software requirements within the SoftwareDevAgency. It communicates with the CEO and UI/UX Designer agents to ensure accurate and comprehensive requirement analysis.",
+        "instructions": "# SoftwareDevAgency Manifesto\n\n## Mission\nThe SoftwareDevAgency is dedicated to streamlining the software development process by efficiently gathering requirements, creating AI-generated UI/UX designs, and implementing these designs in React. Our goal is to leverage AI technology to enhance creativity and productivity while maintaining high standards of quality.\n\n## Working Environment\nThe agency operates in a collaborative environment where each agent has a distinct role but works together towards a common goal. The CEO agent coordinates all activities and ensures seamless communication between agents.\n\n## Goals\n- Efficiently gather and analyze software requirements.\n- Use AI to generate innovative and user-friendly UI/UX designs.\n- Implement designs in React with precision and efficiency.\n- Foster a collaborative and creative working environment.\n\n# Requirements Analyst Agent Instructions\n\nYou are the Requirements Analyst agent responsible for gathering and analyzing software requirements within the SoftwareDevAgency. Your primary role is to ensure that all requirements are accurately captured and communicated to the UI/UX Designer and CEO agents.\n\n### Primary Instructions:\n1. Communicate with the CEO agent to understand the overall project goals and objectives.\n2. Gather detailed software requirements from the user or client.\n3. Analyze the gathered requirements to ensure they are clear, complete, and feasible.\n4. Document the requirements in a structured format and share them with the UI/UX Designer agent.\n5. Collaborate with the UI/UX Designer agent to ensure the designs align with the requirements.\n6. Provide regular updates to the CEO agent regarding the status of requirement gathering and analysis.\n7. Address any discrepancies or changes in requirements promptly to avoid delays in the development process.",
+        "metadata": {},
+        "model": "gpt-4o-2024-08-06",
+        "name": "RequirementsAnalystAgent",
+        "object": "assistant",
+        "tools": [
+            {
+                "function": {
+                    "name": "CommunicationTool",
+                    "description": "This tool enables the Requirements Analyst Agent to communicate with the CEO and UI/UX Designer agents.\nIt supports sending and receiving messages, and scheduling meetings or discussions to gather and verify requirements.",
+                    "parameters": {
+                        "properties": {
+                            "action": {
+                                "description": "The action to perform: 'send_message', 'receive_messages', or 'schedule_meeting'.",
+                                "title": "Action",
+                                "type": "string"
+                            },
+                            "recipient": {
+                                "default": null,
+                                "description": "The recipient of the message or meeting: 'CEO' or 'UI/UX Designer'. Needed for 'send_message' and 'schedule_meeting' actions.",
+                                "title": "Recipient",
+                                "type": "string"
+                            },
+                            "message": {
+                                "default": null,
+                                "description": "The message content. Needed for 'send_message' action.",
+                                "title": "Message",
+                                "type": "string"
+                            },
+                            "meeting_time": {
+                                "default": null,
+                                "description": "The time for the scheduled meeting in 'YYYY-MM-DD HH:MM' format. Needed for 'schedule_meeting' action.",
+                                "title": "Meeting Time",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "action"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
+            {
+                "function": {
+                    "name": "FeasibilityAnalysisTool",
+                    "description": "This tool assists the Requirements Analyst Agent in analyzing the feasibility of the gathered requirements.\nIt evaluates the technical, financial, and time feasibility of each requirement and provides a feasibility report.",
+                    "parameters": {
+                        "properties": {
+                            "requirement_id": {
+                                "description": "The ID of the requirement to analyze.",
+                                "title": "Requirement Id",
+                                "type": "string"
+                            },
+                            "technical_feasibility": {
+                                "description": "The technical feasibility of the requirement (e.g., 'High', 'Medium', 'Low').",
+                                "title": "Technical Feasibility",
+                                "type": "string"
+                            },
+                            "financial_feasibility": {
+                                "description": "The financial feasibility of the requirement (e.g., 'High', 'Medium', 'Low').",
+                                "title": "Financial Feasibility",
+                                "type": "string"
+                            },
+                            "time_feasibility": {
+                                "description": "The time feasibility of the requirement (e.g., 'High', 'Medium', 'Low').",
+                                "title": "Time Feasibility",
+                                "type": "string"
+                            },
+                            "comments": {
+                                "default": null,
+                                "description": "Additional comments or notes regarding the feasibility analysis.",
+                                "title": "Comments",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "financial_feasibility",
+                            "requirement_id",
+                            "technical_feasibility",
+                            "time_feasibility"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
+            {
+                "function": {
+                    "name": "RequirementsDocumentationTool",
+                    "description": "This tool allows the Requirements Analyst Agent to document and organize software requirements.\nIt supports creating, editing, and storing requirement documents in a structured format.\nThe tool also allows for categorization and prioritization of requirements.",
+                    "parameters": {
+                        "properties": {
+                            "action": {
+                                "description": "The action to perform: 'create', 'edit', or 'view'.",
+                                "title": "Action",
+                                "type": "string"
+                            },
+                            "requirement_id": {
+                                "default": null,
+                                "description": "The ID of the requirement to edit or view. Not needed for 'create' action.",
+                                "title": "Requirement Id",
+                                "type": "string"
+                            },
+                            "title": {
+                                "default": null,
+                                "description": "The title of the requirement. Needed for 'create' and 'edit' actions.",
+                                "title": "Title",
+                                "type": "string"
+                            },
+                            "description": {
+                                "default": null,
+                                "description": "The description of the requirement. Needed for 'create' and 'edit' actions.",
+                                "title": "Description",
+                                "type": "string"
+                            },
+                            "category": {
+                                "default": null,
+                                "description": "The category of the requirement. Needed for 'create' and 'edit' actions.",
+                                "title": "Category",
+                                "type": "string"
+                            },
+                            "priority": {
+                                "default": null,
+                                "description": "The priority of the requirement. Needed for 'create' and 'edit' actions.",
+                                "title": "Priority",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "action"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
+            {
+                "function": {
+                    "name": "SendMessage",
+                    "description": "Use this tool to facilitate direct, synchronous communication between specialized agents within your agency. When you send a message using this tool, you receive a response exclusively from the designated recipient agent. To continue the dialogue, invoke this tool again with the desired recipient agent and your follow-up message. Remember, communication here is synchronous; the recipient agent won't perform any tasks post-response. You are responsible for relaying the recipient agent's responses back to the user, as the user does not have direct access to these replies. Keep engaging with the tool for continuous interaction until the task is fully resolved. Do not send more than 1 message at a time.",
+                    "parameters": {
+                        "$defs": {
+                            "recipient": {
+                                "const": "UIUXDesignerAgent",
+                                "enum": [
+                                    "UIUXDesignerAgent"
+                                ],
+                                "title": "recipient",
+                                "type": "string"
+                            }
+                        },
+                        "properties": {
+                            "my_primary_instructions": {
+                                "description": "Please repeat your primary instructions step-by-step, including both completed and the following next steps that you need to perform. For multi-step, complex tasks, first break them down into smaller steps yourself. Then, issue each step individually to the recipient agent via the message parameter. Each identified step should be sent in separate message. Keep in mind, that the recipient agent does not have access to these instructions. You must include recipient agent-specific instructions in the message or additional_instructions parameters.",
+                                "title": "My Primary Instructions",
+                                "type": "string"
+                            },
+                            "recipient": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/$defs/recipient"
+                                    }
+                                ],
+                                "description": "UIUXDesignerAgent: The UI/UX Designer agent is responsible for generating innovative and user-friendly UI/UX designs using DALL-E 3 within the SoftwareDevAgency. It collaborates with the CEO, Requirements Analyst, and Developer agents to ensure designs align with project requirements and goals.\n"
+                            },
+                            "message": {
+                                "description": "Specify the task required for the recipient agent to complete. Focus on clarifying what the task entails, rather than providing exact instructions.",
+                                "title": "Message",
+                                "type": "string"
+                            },
+                            "message_files": {
+                                "anyOf": [
+                                    {
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "type": "array"
+                                    },
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "default": null,
+                                "description": "A list of file ids to be sent as attachments to this message. Only use this if you have the file id that starts with 'file-'.",
+                                "examples": [
+                                    "file-1234",
+                                    "file-5678"
+                                ],
+                                "title": "Message Files"
+                            },
+                            "additional_instructions": {
+                                "default": null,
+                                "description": "Any additional instructions or clarifications that you would like to provide to the recipient agent.",
+                                "title": "Additional Instructions",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "message",
+                            "my_primary_instructions",
+                            "recipient"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            }
+        ],
+        "response_format": "auto",
+        "temperature": 0.3,
+        "tool_resources": {
+            "code_interpreter": null,
+            "file_search": null
+        },
+        "top_p": 1.0
+    },
+    {
+        "id": "asst_4WDI87EMMDoF8alx4aBG89ig",
+        "created_at": 1724708974,
+        "description": "The UI/UX Designer agent is responsible for generating innovative and user-friendly UI/UX designs using DALL-E 3 within the SoftwareDevAgency. It collaborates with the CEO, Requirements Analyst, and Developer agents to ensure designs align with project requirements and goals.",
+        "instructions": "# SoftwareDevAgency Manifesto\n\n## Mission\nThe SoftwareDevAgency is dedicated to streamlining the software development process by efficiently gathering requirements, creating AI-generated UI/UX designs, and implementing these designs in React. Our goal is to leverage AI technology to enhance creativity and productivity while maintaining high standards of quality.\n\n## Working Environment\nThe agency operates in a collaborative environment where each agent has a distinct role but works together towards a common goal. The CEO agent coordinates all activities and ensures seamless communication between agents.\n\n## Goals\n- Efficiently gather and analyze software requirements.\n- Use AI to generate innovative and user-friendly UI/UX designs.\n- Implement designs in React with precision and efficiency.\n- Foster a collaborative and creative working environment.\n\n# UI/UX Designer Agent Instructions\n\nYou are the UI/UX Designer agent responsible for creating AI-generated UI/UX designs using DALL-E 3 within the SoftwareDevAgency. Your primary role is to transform requirements into visually appealing and user-friendly designs.\n\n### Primary Instructions:\n1. Communicate with the Requirements Analyst agent to understand the detailed software requirements.\n2. Use DALL-E 3 to generate innovative UI/UX designs based on the provided requirements.\n3. Share the generated designs with the Developer agent for implementation in React.\n4. Collaborate with the CEO agent to ensure the designs align with the overall project goals and objectives.\n5. Provide feedback and make necessary adjustments to the designs based on input from the Developer and CEO agents.\n6. Document the design process and decisions for future reference and improvements.\n7. Ensure all designs meet the agency's standards for creativity, usability, and quality.",
+        "metadata": {},
+        "model": "gpt-4o-2024-08-06",
+        "name": "UIUXDesignerAgent",
+        "object": "assistant",
+        "tools": [
+            {
+                "function": {
+                    "name": "CommunicationTool",
+                    "description": "This tool enables the UI/UX Designer Agent to communicate with the CEO, Requirements Analyst, and Developer agents.\nIt supports sending and receiving messages, and scheduling meetings or discussions to ensure designs align with project goals.",
+                    "parameters": {
+                        "properties": {
+                            "action": {
+                                "description": "The action to perform: 'send_message', 'receive_messages', or 'schedule_meeting'.",
+                                "title": "Action",
+                                "type": "string"
+                            },
+                            "recipient": {
+                                "default": null,
+                                "description": "The recipient of the message or meeting: 'CEO', 'Requirements Analyst', or 'Developer'. Needed for 'send_message' and 'schedule_meeting' actions.",
+                                "title": "Recipient",
+                                "type": "string"
+                            },
+                            "message": {
+                                "default": null,
+                                "description": "The message content. Needed for 'send_message' action.",
+                                "title": "Message",
+                                "type": "string"
+                            },
+                            "meeting_time": {
+                                "default": null,
+                                "description": "The time for the scheduled meeting in 'YYYY-MM-DD HH:MM' format. Needed for 'schedule_meeting' action.",
+                                "title": "Meeting Time",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "action"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
+            {
+                "function": {
+                    "name": "DesignDocumentationTool",
+                    "description": "This tool helps the UI/UX Designer Agent document the design process and store generated designs for future reference.\nIt supports saving design descriptions, images, and any relevant notes or feedback.",
+                    "parameters": {
+                        "properties": {
+                            "design_id": {
+                                "description": "The unique identifier for the design.",
+                                "title": "Design Id",
+                                "type": "string"
+                            },
+                            "design_description": {
+                                "description": "A description of the design.",
+                                "title": "Design Description",
+                                "type": "string"
+                            },
+                            "design_image_url": {
+                                "description": "The URL of the generated design image.",
+                                "title": "Design Image Url",
+                                "type": "string"
+                            },
+                            "notes": {
+                                "default": null,
+                                "description": "Any relevant notes or feedback regarding the design.",
+                                "title": "Notes",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "design_description",
+                            "design_id",
+                            "design_image_url"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
+            {
+                "function": {
+                    "name": "DesignGenerationTool",
+                    "description": "This tool interfaces with DALL-E 3 to generate UI/UX designs based on the requirements provided by the Requirements Analyst Agent.\nIt allows the agent to input design prompts and receive generated images as output.",
+                    "parameters": {
+                        "properties": {
+                            "design_prompt": {
+                                "description": "The design prompt describing the UI/UX design requirements.",
+                                "title": "Design Prompt",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "design_prompt"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
+            {
+                "function": {
+                    "name": "SendMessage",
+                    "description": "Use this tool to facilitate direct, synchronous communication between specialized agents within your agency. When you send a message using this tool, you receive a response exclusively from the designated recipient agent. To continue the dialogue, invoke this tool again with the desired recipient agent and your follow-up message. Remember, communication here is synchronous; the recipient agent won't perform any tasks post-response. You are responsible for relaying the recipient agent's responses back to the user, as the user does not have direct access to these replies. Keep engaging with the tool for continuous interaction until the task is fully resolved. Do not send more than 1 message at a time.",
+                    "parameters": {
+                        "$defs": {
+                            "recipient": {
+                                "const": "Devid",
+                                "enum": [
+                                    "Devid"
+                                ],
+                                "title": "recipient",
+                                "type": "string"
+                            }
+                        },
+                        "properties": {
+                            "my_primary_instructions": {
+                                "description": "Please repeat your primary instructions step-by-step, including both completed and the following next steps that you need to perform. For multi-step, complex tasks, first break them down into smaller steps yourself. Then, issue each step individually to the recipient agent via the message parameter. Each identified step should be sent in separate message. Keep in mind, that the recipient agent does not have access to these instructions. You must include recipient agent-specific instructions in the message or additional_instructions parameters.",
+                                "title": "My Primary Instructions",
+                                "type": "string"
+                            },
+                            "recipient": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/$defs/recipient"
+                                    }
+                                ],
+                                "description": "Devid: Devid is an AI software engineer capable of performing advanced coding tasks.\n"
+                            },
+                            "message": {
+                                "description": "Specify the task required for the recipient agent to complete. Focus on clarifying what the task entails, rather than providing exact instructions.",
+                                "title": "Message",
+                                "type": "string"
+                            },
+                            "message_files": {
+                                "anyOf": [
+                                    {
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "type": "array"
+                                    },
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "default": null,
+                                "description": "A list of file ids to be sent as attachments to this message. Only use this if you have the file id that starts with 'file-'.",
+                                "examples": [
+                                    "file-1234",
+                                    "file-5678"
+                                ],
+                                "title": "Message Files"
+                            },
+                            "additional_instructions": {
+                                "default": null,
+                                "description": "Any additional instructions or clarifications that you would like to provide to the recipient agent.",
+                                "title": "Additional Instructions",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "message",
+                            "my_primary_instructions",
+                            "recipient"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            }
+        ],
+        "response_format": "auto",
+        "temperature": 0.3,
+        "tool_resources": {
+            "code_interpreter": null,
+            "file_search": null
+        },
+        "top_p": 1.0
+    },
+    {
+        "id": "asst_ZrOnOOkA0oDvK0uOLGDIQRLt",
+        "created_at": 1724708975,
+        "description": "Devid is an AI software engineer capable of performing advanced coding tasks.",
+        "instructions": "# SoftwareDevAgency Manifesto\n\n## Mission\nThe SoftwareDevAgency is dedicated to streamlining the software development process by efficiently gathering requirements, creating AI-generated UI/UX designs, and implementing these designs in React. Our goal is to leverage AI technology to enhance creativity and productivity while maintaining high standards of quality.\n\n## Working Environment\nThe agency operates in a collaborative environment where each agent has a distinct role but works together towards a common goal. The CEO agent coordinates all activities and ensures seamless communication between agents.\n\n## Goals\n- Efficiently gather and analyze software requirements.\n- Use AI to generate innovative and user-friendly UI/UX designs.\n- Implement designs in React with precision and efficiency.\n- Foster a collaborative and creative working environment.\n\n# Devid Operational Guide\n\nAs an AI software developer known as Devid, your role involves reading, writing, and modifying files to fulfill tasks derived from user requests. \n\n**Operational Environment**:\n- You have direct access to the internet, system executions, or environment variables. \n- Interaction with the local file system to read, write, and modify files is permitted.\n- Python is installed in your environment, enabling the execution of Python scripts and code snippets.\n- Node.js and npm are also installed, allowing for the execution of Node.js scripts and code snippets.\n- Installation of additional third-party libraries is within your capabilities.\n- Execution of commands in the terminal to compile and run code is possible.\n\n## Primary Instructions:\n\n1. Begin by fully understanding the task at hand. Use the `myfiles_browser` tool to access and review any files uploaded by the user. If initial access to files fails, retry the operation until successful. Continue browsing the files until you have gathered sufficient information to proceed. Skip this step if no files were provided.\n2. Verify your current directory's path and contents with `ListDir` and `CheckCurrentDir`. If necessary, navigate to the correct directory using the `DirectoryNavigator` tool or create a new directory for the task.\n3. Utilize the `FileWriter` for creating or modifying files. To read a file, employ the `FileReader` tool. Always modify local files when executing tasks and avoid sending code snippets to the user. Work on one file at a time and refrain from creating or modifying multiple files simultaneously. Complete each file with `FileWriter` before proceeding to the next, integrating these files into the dependencies of the main file.\n4. Execute your written code with the `CommandExecutor` by running the appropriate terminal commands. Iteratively debug and test to achieve the desired outcome. Seek clarification from the user only after all internal resolution efforts have been exhausted. To install additional libraries, execute the necessary terminal commands.\n5. Repeat the above steps for each task.\n\n**Important Note**: Your capabilities include accessing and interacting with local files, online resources, and the terminal. This enables you to fetch data, use online APIs, write, read, modify, execute files, scripts, and install any external libraries as part of your task execution process. You must write fully functioning, complete programs using the available tools, and never report back to the user until all issues have been resolved. Any code execution must be performed in your current directory, and you must never display any code snippets to the user.",
+        "metadata": {},
+        "model": "gpt-4o-2024-08-06",
+        "name": "Devid",
+        "object": "assistant",
+        "tools": [
+            {
+                "type": "file_search",
+                "file_search": null
+            },
+            {
+                "function": {
+                    "name": "ChangeFile",
+                    "description": "This tool changes specified lines in a file. Returns the new file contents with line numbers at the start of each line.",
+                    "parameters": {
+                        "$defs": {
+                            "LineChange": {
+                                "description": "Line changes to be made.",
+                                "properties": {
+                                    "line_number": {
+                                        "description": "Line number to change.",
+                                        "examples": [
+                                            1,
+                                            2,
+                                            3
+                                        ],
+                                        "title": "Line Number",
+                                        "type": "integer"
+                                    },
+                                    "new_line": {
+                                        "anyOf": [
+                                            {
+                                                "type": "string"
+                                            },
+                                            {
+                                                "type": "null"
+                                            }
+                                        ],
+                                        "default": null,
+                                        "description": "New line to replace the old line. Not required only for delete mode.",
+                                        "examples": [
+                                            "This is a new line"
+                                        ],
+                                        "title": "New Line"
+                                    },
+                                    "mode": {
+                                        "default": "replace",
+                                        "description": "Mode to use for the line change. \"replace\" replaces the line with the new line. \"insert\" inserts the new line at the specified line number, moving the previous line down. \"delete\" deletes the specified line number.",
+                                        "enum": [
+                                            "replace",
+                                            "insert",
+                                            "delete"
+                                        ],
+                                        "title": "Mode",
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "line_number"
+                                ],
+                                "title": "LineChange",
+                                "type": "object"
+                            }
+                        },
+                        "properties": {
+                            "chain_of_thought": {
+                                "description": "Please think step-by-step about the required changes to the file in order to construct a fully functioning and correct program according to the requirements.",
+                                "title": "Chain Of Thought",
+                                "type": "string"
+                            },
+                            "file_path": {
+                                "description": "Path to the file with extension.",
+                                "examples": [
+                                    "./file.txt",
+                                    "./file.json",
+                                    "../../file.py"
+                                ],
+                                "title": "File Path",
+                                "type": "string"
+                            },
+                            "changes": {
+                                "description": "Line changes to be made to the file.",
+                                "examples": [
+                                    {
+                                        "line_number": 1,
+                                        "mode": "replace",
+                                        "new_line": "This is a new line"
+                                    }
+                                ],
+                                "items": {
+                                    "$ref": "#/$defs/LineChange"
+                                },
+                                "title": "Changes",
+                                "type": "array"
+                            }
+                        },
+                        "required": [
+                            "chain_of_thought",
+                            "changes",
+                            "file_path"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
+            {
+                "function": {
+                    "name": "CheckCurrentDir",
+                    "description": "This tool checks the current directory path.",
+                    "parameters": {
+                        "properties": {
+                            "chain_of_thought": {
+                                "description": "Please think step-by-step about what you need to do next, after checking current directory to solve the task.",
+                                "title": "Chain Of Thought",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "chain_of_thought"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
+            {
+                "function": {
+                    "name": "CommandExecutor",
+                    "description": "Executes a specified command in the terminal and captures the output.\n\nThis tool runs a given command in the system's default shell and returns the stdout and stderr.",
+                    "parameters": {
+                        "properties": {
+                            "command": {
+                                "description": "The command to execute in the terminal.",
+                                "title": "Command",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "command"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
+            {
+                "function": {
+                    "name": "DirectoryNavigator",
+                    "description": "Allows you to navigate directories. Do not use this tool more than once at a time.\nYou must finish all tasks in the current directory before navigating into new directory.",
+                    "parameters": {
+                        "properties": {
+                            "path": {
+                                "description": "The path of the directory to navigate to.",
+                                "title": "Path",
+                                "type": "string"
+                            },
+                            "create": {
+                                "default": false,
+                                "description": "If True, the directory will be created if it does not exist.",
+                                "title": "Create",
+                                "type": "boolean"
+                            }
+                        },
+                        "required": [
+                            "path"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
+            {
+                "function": {
+                    "name": "FileMover",
+                    "description": "FileMover is a tool designed to move files from a source path to a destination path. If the destination directory does not exist, it will be created.",
+                    "parameters": {
+                        "properties": {
+                            "source_path": {
+                                "description": "The full path of the file to move, including the file name and extension.",
+                                "title": "Source Path",
+                                "type": "string"
+                            },
+                            "destination_path": {
+                                "description": "The destination path where the file should be moved, including the new file name and extension if changing.",
+                                "title": "Destination Path",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "destination_path",
+                            "source_path"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
+            {
+                "function": {
+                    "name": "FileReader",
+                    "description": "This tool reads a file and returns the contents along with line numbers on the left.",
+                    "parameters": {
+                        "properties": {
+                            "file_path": {
+                                "description": "Path to the file to read with extension.",
+                                "examples": [
+                                    "./file.txt",
+                                    "./file.json",
+                                    "../../file.py"
+                                ],
+                                "title": "File Path",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "file_path"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
+            {
+                "function": {
+                    "name": "FileWriter",
+                    "description": "This tools allows you to write new files or modify existing files according to specified requirements. In 'write' mode, it creates a new file or overwrites an existing one. In 'modify' mode, it modifies an existing file according to the provided requirements.\nNote: This tool does not have access to other files within the project. You must provide all necessary details to ensure that the generated file can be used in conjunction with other files in this project.",
+                    "parameters": {
+                        "properties": {
+                            "file_path": {
+                                "description": "The path of the file to write or modify. Will create directories if they don't exist.",
+                                "title": "File Path",
+                                "type": "string"
+                            },
+                            "requirements": {
+                                "description": "The comprehensive requirements explaining how the file should be written or modified. This should be a detailed description of what the file should contain, including example inputs, desired behaviour and ideal outputs. It must not contain any code or implementation details.",
+                                "title": "Requirements",
+                                "type": "string"
+                            },
+                            "details": {
+                                "default": null,
+                                "description": "Additional details like error messages, or class, function, and variable names from other files that this file depends on.",
+                                "title": "Details",
+                                "type": "string"
+                            },
+                            "documentation": {
+                                "anyOf": [
+                                    {
+                                        "type": "string"
+                                    },
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "default": null,
+                                "description": "Relevant documentation extracted with the myfiles_browser tool. You must pass all the relevant code from the documentation, as this tool does not have access to those files.",
+                                "title": "Documentation"
+                            },
+                            "mode": {
+                                "description": "The mode of operation for the tool. 'write' is used to create a new file or overwrite an existing one. 'modify' is used to modify an existing file.",
+                                "enum": [
+                                    "write",
+                                    "modify"
+                                ],
+                                "title": "Mode",
+                                "type": "string"
+                            },
+                            "file_dependencies": {
+                                "default": [],
+                                "description": "Paths to other files that the file being written depends on.",
+                                "examples": [
+                                    "/path/to/dependency1.py",
+                                    "/path/to/dependency2.css",
+                                    "/path/to/dependency3.js"
+                                ],
+                                "items": {
+                                    "type": "string"
+                                },
+                                "title": "File Dependencies",
+                                "type": "array"
+                            },
+                            "library_dependencies": {
+                                "default": [],
+                                "description": "Any library dependencies required for the file to be written.",
+                                "examples": [
+                                    "numpy",
+                                    "pandas"
+                                ],
+                                "items": {
+                                    "type": "string"
+                                },
+                                "title": "Library Dependencies",
+                                "type": "array"
+                            }
+                        },
+                        "required": [
+                            "file_path",
+                            "mode",
+                            "requirements"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
+            {
+                "function": {
+                    "name": "ListDir",
+                    "description": "This tool returns the tree structure of the directory.",
+                    "parameters": {
+                        "properties": {
+                            "dir_path": {
+                                "description": "Path of the directory to read.",
+                                "examples": [
+                                    "./",
+                                    "./test",
+                                    "../../"
+                                ],
+                                "title": "Dir Path",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "dir_path"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            }
+        ],
+        "response_format": "auto",
+        "temperature": 0.0,
+        "tool_resources": {
+            "code_interpreter": null,
+            "file_search": {
+                "vector_store_ids": []
+            }
+        },
+        "top_p": 1.0
+    }
+]
