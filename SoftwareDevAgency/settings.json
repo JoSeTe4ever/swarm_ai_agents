@@ -871,6 +871,9 @@
         "object": "assistant",
         "tools": [
             {
+                "type": "code_interpreter"
+            },
+            {
                 "function": {
                     "name": "DesignGenerationTool",
                     "description": "This tool interfaces with DALL-E 3 to generate UI/UX designs based on the requirements provided by the Requirements Analyst Agent.\nIt allows the agent to input design prompts and receive generated images as output.",
@@ -895,7 +898,11 @@
         "response_format": "auto",
         "temperature": 0.3,
         "tool_resources": {
-            "code_interpreter": null,
+            "code_interpreter": {
+                "file_ids": [
+                    "file-Vp8MJPs7NRHTGPzUjvH4g32D"
+                ]
+            },
             "file_search": null
         },
         "top_p": 1.0

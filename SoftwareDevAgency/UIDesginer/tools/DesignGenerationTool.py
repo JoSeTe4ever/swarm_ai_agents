@@ -32,7 +32,8 @@ class DesignGenerationTool(BaseTool):
 
         try:
             # Generate the design using DALL-E 3
-            response = openai.images.generate(
+            response = openai.images.edit(
+                image=open('E:/dev/Projects/swarm_ai_agents/SoftwareDevAgency/UIDesginer/tools/reference2_file.png','rb'),  # from the generation section
                 prompt=self.design_prompt,
                 n=1,
                 size="1024x1024"
