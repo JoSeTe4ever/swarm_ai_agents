@@ -53,5 +53,6 @@ def test_dalle_image_generator():
     print(f"Generated Image URL: {image_url}")
 
 if __name__ == '__main__':
-    #agency.demo_gradio() this is for init the agency
-    test_dalle_image_generator()
+    #this is for init the agency
+    agency.demo_gradio() 
+    #test_dalle_image_generator()

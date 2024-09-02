@@ -15,6 +15,9 @@ class DesignGenerationTool(BaseTool):
     It allows the agent to input design prompts and receive generated images as output.
     """
 
+    class ToolConfig: 
+        strict = True
+
     design_prompt: str = Field(
         ..., description="The design prompt describing the UI/UX design requirements."
     )

@@ -1,5 +1,6 @@
 from agency_swarm.agents import Agent
 
+from UIDesginer.models.GeneratedImageResponse import GeneratedImageResponse
 
 class UIDesginer(Agent):
     def __init__(self):
@@ -13,6 +14,7 @@ class UIDesginer(Agent):
             tools_folder="./tools",
             temperature=0.3,
             max_prompt_tokens=25000,
+            response_format=GeneratedImageResponse
         )
         
     def response_validator(self, message):

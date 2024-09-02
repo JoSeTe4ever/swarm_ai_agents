@@ -888,9 +888,10 @@
                         "required": [
                             "design_prompt"
                         ],
-                        "type": "object"
+                        "type": "object",
+                        "additionalProperties": false
                     },
-                    "strict": false
+                    "strict": true
                 },
                 "type": "function"
             }
