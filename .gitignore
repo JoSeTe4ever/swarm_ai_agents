@@ -1,2 +1,4 @@
 /venv
 /SoftwareDevAgency/.env
+/**/**/*.pyc
+*.pyc
