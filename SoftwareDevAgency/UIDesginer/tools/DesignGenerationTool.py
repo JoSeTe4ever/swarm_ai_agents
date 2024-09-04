@@ -44,17 +44,20 @@ class DesignGenerationTool(BaseTool):
 
             # Extract the URL of the generated image
             image_url = response.data[0].url
-
-            return f"Design generated successfully. Image URL: {image_url}. Image location {image_location}"
+            return f"Design generated successfully. Image URL: {image_url}"
 
         except Exception as e:
             return f"An error occurred while generating the design: {str(e)}"
         
-    def save_image_to_disk(image_response):
-        if image_response.status_code == 200:
-            with open('generated_image.png', 'wb') as f:
-                f.write(image_response.content)
+
+
+def save_image_to_disk(image_response):
+    if image_response.status_code == 200:
+        with open('generated_image.png', 'wb') as f:
+            f.write(image_response.content)
             print("Image downloaded and saved as 'generated_image.png'")
-        else:
-            print("Failed to download the image")
-            raise Exception("Failed to download the image")
+            return os.path.abspath(f)
+
+    else:
+        print("Failed to download the image")
+        raise Exception("Failed to download the image")

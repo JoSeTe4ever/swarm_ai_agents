@@ -1,11 +1,13 @@
 from agency_swarm import Agency
 from Devid import Devid
+from FrontendDeveloperAgent import FrontendDeveloperAgent
 from UIUXDesignerAgent import UIUXDesignerAgent
 from RequirementsAnalystAgent import RequirementsAnalystAgent
 from CEOAgent import CEOAgent
 from agency_swarm import set_openai_key
 from UIDesginer import UIDesginer
 from UIDesginer.tools.DesignGenerationTool import  DesignGenerationTool
+from FrontendDeveloperAgent.tools.ImageToCode import  ImageToCode
 
 import os
 from dotenv import load_dotenv
@@ -22,6 +24,7 @@ requirements_analyst = RequirementsAnalystAgent()
 uiux_designer = UIUXDesignerAgent()
 developer = Devid()
 ui_designer = UIDesginer()
+fe_developer = FrontendDeveloperAgent()
 
 # agency = Agency([ceo, [ceo, requirements_analyst],
 #                  [ceo, uiux_designer],
@@ -52,7 +55,21 @@ def test_dalle_image_generator():
     # Print the result (either URL or base64 string depending on the return_base64 setting)
     print(f"Generated Image URL: {image_url}")
 
+def test_image2code():
+    # Create an instance of the tool with a sample prompt
+    image2code_tool = ImageToCode(image_url="https://oaidalleapiprodscus.blob.core.windows.net/private/org-0sfjRM1BH1TpAhFDzutPncf2/user-dh8jqRtli6W5hOQx1h3v3Ppx/img-B4Ksx8TM6zpJvUTkqyYBq9eP.png?st=2024-09-04T19%3A09%3A21Z&se=2024-09-04T21%3A09%3A21Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-09-04T18%3A52%3A52Z&ske=2024-09-05T18%3A52%3A52Z&sks=b&skv=2024-08-04&sig=yTbMEsU7SXGfUCN8HVI4Wa1e2RYsfT3/Be1fu1mvscI%3D", return_base64=False)
+    
+    # Run the tool to generate the image
+    seen_image_text = image2code_tool.run()
+    
+    # Print the result (either URL or base64 string depending on the return_base64 setting)
+    print(f"Interpretation of image: {seen_image_text}")
+
+
+
+
 if __name__ == '__main__':
     #this is for init the agency
-    agency.demo_gradio() 
+    #agency.demo_gradio() 
     #test_dalle_image_generator()
+    test_image2code()

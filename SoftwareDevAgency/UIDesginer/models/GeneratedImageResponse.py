@@ -3,11 +3,10 @@ import json
 
 class GeneratedImageResponse(BaseModel):
     image_url: str
-    file_image_location: str
 
 
 
-# Define the JSON schema for structured output
+# Define the JSON schema for structured output lo tengo aqui como guia
 response_format ={
     "type": "json_schema",
     "json_schema": {

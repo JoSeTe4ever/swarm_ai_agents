@@ -902,15 +902,10 @@
                         "image_url": {
                             "title": "Image Url",
                             "type": "string"
-                        },
-                        "file_image_location": {
-                            "title": "File Image Location",
-                            "type": "string"
                         }
                     },
                     "required": [
-                        "image_url",
-                        "file_image_location"
+                        "image_url"
                     ],
                     "title": "GeneratedImageResponse",
                     "type": "object",
