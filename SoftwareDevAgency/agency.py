@@ -37,7 +37,8 @@ fe_developer = FrontendDeveloperAgent()
 #                 )
 
 
-agency = Agency([ui_designer, []],
+agency = Agency([ui_designer, [fe_developer],
+                 [ui_designer, fe_developer],],
                  shared_instructions='./agency_manifesto.md',  # shared instructions for all agents
                  max_prompt_tokens=25000,  # default tokens in conversation for all agents
                  temperature=0.3,  # default temperature for all agents
@@ -57,7 +58,7 @@ def test_dalle_image_generator():
 
 def test_image2code():
     # Create an instance of the tool with a sample prompt
-    image2code_tool = ImageToCode(image_url="https://oaidalleapiprodscus.blob.core.windows.net/private/org-0sfjRM1BH1TpAhFDzutPncf2/user-dh8jqRtli6W5hOQx1h3v3Ppx/img-B4Ksx8TM6zpJvUTkqyYBq9eP.png?st=2024-09-04T19%3A09%3A21Z&se=2024-09-04T21%3A09%3A21Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-09-04T18%3A52%3A52Z&ske=2024-09-05T18%3A52%3A52Z&sks=b&skv=2024-08-04&sig=yTbMEsU7SXGfUCN8HVI4Wa1e2RYsfT3/Be1fu1mvscI%3D", return_base64=False)
+    image2code_tool = ImageToCode(image_url="https://oaidalleapiprodscus.blob.core.windows.net/private/org-0sfjRM1BH1TpAhFDzutPncf2/user-dh8jqRtli6W5hOQx1h3v3Ppx/img-dQ5ACy7HD46kf00Ss0RHgeSr.png?st=2024-09-05T13%3A56%3A07Z&se=2024-09-05T15%3A56%3A07Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-09-04T22%3A47%3A09Z&ske=2024-09-05T22%3A47%3A09Z&sks=b&skv=2024-08-04&sig=7WvwSmJoDpAHuGiJDO3GhV0MkivLSpbYydIiOwf9ljI%3D", return_base64=False)
     
     # Run the tool to generate the image
     seen_image_text = image2code_tool.run()
@@ -70,6 +71,6 @@ def test_image2code():
 
 if __name__ == '__main__':
     #this is for init the agency
-    #agency.demo_gradio() 
+    agency.demo_gradio() 
     #test_dalle_image_generator()
-    test_image2code()
+    #test_image2code()

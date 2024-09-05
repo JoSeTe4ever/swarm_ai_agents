@@ -864,12 +864,45 @@
         "id": "asst_lQ7QHVWYpoMImEPIqtjfu8Vq",
         "created_at": 1724777826,
         "description": "This agent will create a UI design using templates supplied",
-        "instructions": "# SoftwareDevAgency Manifesto\n\n## Mission\nThe SoftwareDevAgency is dedicated to streamlining the software development process by efficiently gathering requirements, creating AI-generated UI/UX designs, and implementing these designs in React. Our goal is to leverage AI technology to enhance creativity and productivity while maintaining high standards of quality.\n\n## Working Environment\nThe agency operates in a collaborative environment where each agent has a distinct role but works together towards a common goal. The CEO agent coordinates all activities and ensures seamless communication between agents.\n\n## Goals\n- Efficiently gather and analyze software requirements.\n- Use AI to generate innovative and user-friendly UI/UX designs.\n- Implement designs in React with precision and efficiency.\n- Foster a collaborative and creative working environment.\n\n# UIDesginer Instructions\n\nYou are the UI/UX Designer agent responsible for creating AI-generated UI/UX designs using DALL-E 3 within the SoftwareDevAgency. Your primary role is to transform requirements into visually appealing and user-friendly designs.\n\n### Primary Instructions:\n1. Communicate with the Requirements Analyst agent to understand the detailed software requirements.\n2. Use DALL-E 3 to generate innovative UI/UX designs based on the provided requirements.Create a modern website mockup for a BASF website with emphasis on functionality\n3. Share the generated designs with the Developer agent for implementation through a file.",
+        "instructions": "# SoftwareDevAgency Manifesto\n\n## Mission\nThe SoftwareDevAgency is dedicated to streamlining the software development process by efficiently gathering requirements, creating AI-generated UI/UX designs, and implementing these designs in React. Our goal is to leverage AI technology to enhance creativity and productivity while maintaining high standards of quality.\n\n## Working Environment\nThe agency operates in a collaborative environment where each agent has a distinct role but works together towards a common goal. The UIDesigner agent generates an image and the FrotnendDeveloperAgent takes its and turns in into HTML JS and CSS.\n\n## Goals\n- Use AI to generate innovative and user-friendly UI/UX designs.\n- Implement designs in HTML JS and CSS with precision and efficiency.\n- Foster a collaborative and creative working environment.\n\n# UIDesginer Instructions\n\nYou are the UI/UX Designer agent responsible for creating AI-generated UI/UX designs using DALL-E 3 within the SoftwareDevAgency. Your primary role is to transform requirements into visually appealing and user-friendly designs.\n\n### Primary Instructions:\n1. Communicate with the Requirements Analyst agent to understand the detailed software requirements.\n2. Use DALL-E 3 to generate innovative UI/UX designs based on the provided requirements.Create a modern website mockup for a BASF website with emphasis on functionality\n3. Share the generated designs with the Developer agent for implementation through a file.",
         "metadata": {},
         "model": "gpt-4o-2024-08-06",
         "name": "UIDesginer",
         "object": "assistant",
         "tools": [
+            {
+                "function": {
+                    "name": "CommunicationTool",
+                    "description": "A tool that allows two agents to communicate by reading and writing messages to a shared JSON file.\nAgents can post a message, read the latest message, and retrieve a history of messages.",
+                    "parameters": {
+                        "properties": {
+                            "sender": {
+                                "description": "The name or ID of the agent sending the message.",
+                                "title": "Sender",
+                                "type": "string"
+                            },
+                            "receiver": {
+                                "description": "The name or ID of the agent receiving the message.",
+                                "title": "Receiver",
+                                "type": "string"
+                            },
+                            "message": {
+                                "description": "The message content being sent by the sender.",
+                                "title": "Message",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "message",
+                            "receiver",
+                            "sender"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
             {
                 "function": {
                     "name": "DesignGenerationTool",
@@ -889,6 +922,78 @@
                         "additionalProperties": false
                     },
                     "strict": true
+                },
+                "type": "function"
+            },
+            {
+                "function": {
+                    "name": "SendMessage",
+                    "description": "Use this tool to facilitate direct, synchronous communication between specialized agents within your agency. When you send a message using this tool, you receive a response exclusively from the designated recipient agent. To continue the dialogue, invoke this tool again with the desired recipient agent and your follow-up message. Remember, communication here is synchronous; the recipient agent won't perform any tasks post-response. You are responsible for relaying the recipient agent's responses back to the user, as the user does not have direct access to these replies. Keep engaging with the tool for continuous interaction until the task is fully resolved. Do not send more than 1 message at a time.",
+                    "parameters": {
+                        "$defs": {
+                            "recipient": {
+                                "const": "FrontendDeveloperAgent",
+                                "enum": [
+                                    "FrontendDeveloperAgent"
+                                ],
+                                "title": "recipient",
+                                "type": "string"
+                            }
+                        },
+                        "properties": {
+                            "my_primary_instructions": {
+                                "description": "Please repeat your primary instructions step-by-step, including both completed and the following next steps that you need to perform. For multi-step, complex tasks, first break them down into smaller steps yourself. Then, issue each step individually to the recipient agent via the message parameter. Each identified step should be sent in separate message. Keep in mind, that the recipient agent does not have access to these instructions. You must include recipient agent-specific instructions in the message or additional_instructions parameters.",
+                                "title": "My Primary Instructions",
+                                "type": "string"
+                            },
+                            "recipient": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/$defs/recipient"
+                                    }
+                                ],
+                                "description": "FrontendDeveloperAgent: This agent takes a picture reads it, undestands it, and generate 3 files (html js and css) that represent this image\n"
+                            },
+                            "message": {
+                                "description": "Specify the task required for the recipient agent to complete. Focus on clarifying what the task entails, rather than providing exact instructions.",
+                                "title": "Message",
+                                "type": "string"
+                            },
+                            "message_files": {
+                                "anyOf": [
+                                    {
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "type": "array"
+                                    },
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "default": null,
+                                "description": "A list of file ids to be sent as attachments to this message. Only use this if you have the file id that starts with 'file-'.",
+                                "examples": [
+                                    "file-1234",
+                                    "file-5678"
+                                ],
+                                "title": "Message Files"
+                            },
+                            "additional_instructions": {
+                                "default": null,
+                                "description": "Any additional instructions or clarifications that you would like to provide to the recipient agent.",
+                                "title": "Additional Instructions",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "message",
+                            "my_primary_instructions",
+                            "recipient"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
                 },
                 "type": "function"
             }
@@ -922,6 +1027,110 @@
                     "file-Vp8MJPs7NRHTGPzUjvH4g32D"
                 ]
             },
+            "file_search": null
+        },
+        "top_p": 1.0
+    },
+    {
+        "id": "asst_4vVixXyUnkvhUSVERZaXrhPA",
+        "created_at": 1725548369,
+        "description": "This agent takes a picture reads it, undestands it, and generate 3 files (html js and css) that represent this image",
+        "instructions": "# SoftwareDevAgency Manifesto\n\n## Mission\nThe SoftwareDevAgency is dedicated to streamlining the software development process by efficiently gathering requirements, creating AI-generated UI/UX designs, and implementing these designs in React. Our goal is to leverage AI technology to enhance creativity and productivity while maintaining high standards of quality.\n\n## Working Environment\nThe agency operates in a collaborative environment where each agent has a distinct role but works together towards a common goal. The UIDesigner agent generates an image and the FrotnendDeveloperAgent takes its and turns in into HTML JS and CSS.\n\n## Goals\n- Use AI to generate innovative and user-friendly UI/UX designs.\n- Implement designs in HTML JS and CSS with precision and efficiency.\n- Foster a collaborative and creative working environment.\n\n# FrontendDeveloperAgent Instructions\n\nYou are the Frontend developer agent responsible for view and interpret an image that represents a UX deisgn and return three parts, html css and js of it.",
+        "metadata": {},
+        "model": "gpt-4o-2024-08-06",
+        "name": "FrontendDeveloperAgent",
+        "object": "assistant",
+        "tools": [
+            {
+                "function": {
+                    "name": "CommunicationTool",
+                    "description": "A tool that allows two agents to communicate by reading and writing messages to a shared JSON file.\nAgents can post a message, read the latest message, and retrieve a history of messages.",
+                    "parameters": {
+                        "properties": {
+                            "sender": {
+                                "description": "The name or ID of the agent sending the message.",
+                                "title": "Sender",
+                                "type": "string"
+                            },
+                            "receiver": {
+                                "description": "The name or ID of the agent receiving the message.",
+                                "title": "Receiver",
+                                "type": "string"
+                            },
+                            "message": {
+                                "description": "The message content being sent by the sender.",
+                                "title": "Message",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "message",
+                            "receiver",
+                            "sender"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
+            {
+                "function": {
+                    "name": "ImageToCode",
+                    "description": "A brief description of what the custom tool does.\nThe docstring should clearly explain the tool's purpose and functionality.\nIt will be used by the agent to determine when to use this tool.",
+                    "parameters": {
+                        "properties": {
+                            "image_url": {
+                                "description": "url where the image is to be found",
+                                "title": "Image Url",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "image_url"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            }
+        ],
+        "response_format": {
+            "json_schema": {
+                "name": "InterpretedImageResponse",
+                "description": null,
+                "schema_": {
+                    "properties": {
+                        "html": {
+                            "title": "Html",
+                            "type": "string"
+                        },
+                        "css": {
+                            "title": "Css",
+                            "type": "string"
+                        },
+                        "javascript": {
+                            "title": "Javascript",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "html",
+                        "css",
+                        "javascript"
+                    ],
+                    "title": "InterpretedImageResponse",
+                    "type": "object",
+                    "additionalProperties": false
+                },
+                "strict": true
+            },
+            "type": "json_schema"
+        },
+        "temperature": 0.3,
+        "tool_resources": {
+            "code_interpreter": null,
             "file_search": null
         },
         "top_p": 1.0

@@ -58,4 +58,9 @@ class ImageToCode(BaseTool):
         
         # Extract and return the generated code from the response
         print(response.json())
+        
+        #if (response.json()['error']):
+        #    print(response.json()['error'])
+        #    # check how to do this 
+        
         return response.json()['choices'][0]['message']['content']
