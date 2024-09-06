@@ -1,5 +1,4 @@
-[
-    {
+[{
         "id": "asst_oxTSR36o7Lvg4JVnEjX1o3XS",
         "created_at": 1724573215,
         "description": "Acts as the overseer and communicator across the agency, ensuring alignment with the agency's goals.",
@@ -8,8 +7,7 @@
         "model": "gpt-4o-2024-08-06",
         "name": "GenesisCEO",
         "object": "assistant",
-        "tools": [
-            {
+        "tools": [{
                 "function": {
                     "name": "CreateAgencyFolder",
                     "description": "This tool creates or modifies an agency folder. You can use it again with the same agency_name to modify a previously created agency, if the user wants to change the agency chart or the manifesto.",
@@ -113,11 +111,9 @@
                                 "type": "string"
                             },
                             "recipient": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/$defs/recipient"
-                                    }
-                                ],
+                                "allOf": [{
+                                    "$ref": "#/$defs/recipient"
+                                }],
                                 "description": "AgentCreator: This agent is responsible for creating new agents for the agency.\n"
                             },
                             "message": {
@@ -125,9 +121,8 @@
                                 "title": "Message",
                                 "type": "string"
                             },
-                            "message_files": {
-                                "anyOf": [
-                                    {
+                            "message_image_urls": {
+                                "anyOf": [{
                                         "items": {
                                             "type": "string"
                                         },
@@ -138,12 +133,11 @@
                                     }
                                 ],
                                 "default": null,
-                                "description": "A list of file ids to be sent as attachments to this message. Only use this if you have the file id that starts with 'file-'.",
+                                "description": "A list of file urls to be sent in case they are needed'.",
                                 "examples": [
-                                    "file-1234",
-                                    "file-5678"
+                                    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-0sfjRM1BH1TpAhFDzutPncf2/user-dh8jqRtli6W5hOQx1h3v3Ppx/img-rC8l169lL4K4f1I0Bgtgy8QY.png?st=2024-09-06T14%3A25%3A08Z&se=2024-09-06T16%3A25%3A08Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-09-05T21%3A24%3A09Z&ske=2024-09-06T21%3A24%3A09Z&sks=b&skv=2024-08-04&sig=p6KyE5D8ljFL9VlMiugIMsTe4qsuNwxV17e2SmUBPjc%3D"
                                 ],
-                                "title": "Message Files"
+                                "title": "Message image urls"
                             },
                             "additional_instructions": {
                                 "default": null,
@@ -181,8 +175,7 @@
         "model": "gpt-4o-2024-08-06",
         "name": "ToolCreator",
         "object": "assistant",
-        "tools": [
-            {
+        "tools": [{
                 "function": {
                     "name": "CreateTool",
                     "description": "This tool creates other custom tools for the agent, based on your requirements and details.",
@@ -262,8 +255,7 @@
                                 "type": "string"
                             },
                             "arguments": {
-                                "anyOf": [
-                                    {
+                                "anyOf": [{
                                         "type": "string"
                                     },
                                     {
@@ -310,8 +302,7 @@
         "model": "gpt-4o-2024-08-06",
         "name": "AgentCreator",
         "object": "assistant",
-        "tools": [
-            {
+        "tools": [{
                 "function": {
                     "name": "ImportAgent",
                     "description": "This tool imports an existing agent from agency swarm framework. Please make sure to first use the GetAvailableAgents tool to get the list of available agents.",
@@ -434,11 +425,9 @@
                                 "type": "string"
                             },
                             "recipient": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/$defs/recipient"
-                                    }
-                                ],
+                                "allOf": [{
+                                    "$ref": "#/$defs/recipient"
+                                }],
                                 "description": "ToolCreator: This agent is responsible for creating new tools for the agency using python code.\n"
                             },
                             "message": {
@@ -447,8 +436,7 @@
                                 "type": "string"
                             },
                             "message_files": {
-                                "anyOf": [
-                                    {
+                                "anyOf": [{
                                         "items": {
                                             "type": "string"
                                         },
