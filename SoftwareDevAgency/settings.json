@@ -1035,7 +1035,7 @@
         "id": "asst_4vVixXyUnkvhUSVERZaXrhPA",
         "created_at": 1725548369,
         "description": "This agent takes a picture reads it, undestands it, and generate 3 files (html js and css) that represent this image",
-        "instructions": "# SoftwareDevAgency Manifesto\n\n## Mission\nThe SoftwareDevAgency is dedicated to streamlining the software development process by efficiently gathering requirements, creating AI-generated UI/UX designs, and implementing these designs in React. Our goal is to leverage AI technology to enhance creativity and productivity while maintaining high standards of quality.\n\n## Working Environment\nThe agency operates in a collaborative environment where each agent has a distinct role but works together towards a common goal. The UIDesigner agent generates an image and the FrotnendDeveloperAgent takes its and turns in into HTML JS and CSS.\n\n## Goals\n- Use AI to generate innovative and user-friendly UI/UX designs.\n- Implement designs in HTML JS and CSS with precision and efficiency.\n- Foster a collaborative and creative working environment.\n\n# FrontendDeveloperAgent Instructions\n\nYou are the Frontend developer agent responsible for view and interpret an image that represents a UX deisgn and return three parts, html css and js of it.",
+        "instructions": "# SoftwareDevAgency Manifesto\n\n## Mission\nThe SoftwareDevAgency is dedicated to streamlining the software development process by efficiently gathering requirements, creating AI-generated UI/UX designs, and implementing these designs in React. Our goal is to leverage AI technology to enhance creativity and productivity while maintaining high standards of quality.\n\n## Working Environment\nThe agency operates in a collaborative environment where each agent has a distinct role but works together towards a common goal. The UIDesigner agent generates an image and the FrotnendDeveloperAgent takes its and turns in into HTML JS and CSS.\n\n## Goals\n- Use AI to generate innovative and user-friendly UI/UX designs.\n- Implement designs in HTML JS and CSS with precision and efficiency.\n- Foster a collaborative and creative working environment.\n\n# FrontendDeveloperAgent Instructions\n\nYou are the Frontend developer agent responsible for view and interpret an image that represents a UX deisgn and return three parts, html css and js of it.\n\n# Primary instructions \n\n1. Utilize the `ImageToCode` for generating HTML JS and CSS from a supplied image.",
         "metadata": {},
         "model": "gpt-4o-2024-08-06",
         "name": "FrontendDeveloperAgent",
@@ -1076,8 +1076,34 @@
             },
             {
                 "function": {
+                    "name": "FileReader",
+                    "description": "This tool reads a file and returns the contents along with line numbers on the left.",
+                    "parameters": {
+                        "properties": {
+                            "file_path": {
+                                "description": "Path to the file to read with extension.",
+                                "examples": [
+                                    "./file.txt",
+                                    "./file.json",
+                                    "../../file.py"
+                                ],
+                                "title": "File Path",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "file_path"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
+            {
+                "function": {
                     "name": "ImageToCode",
-                    "description": "A brief description of what the custom tool does.\nThe docstring should clearly explain the tool's purpose and functionality.\nIt will be used by the agent to determine when to use this tool.",
+                    "description": "This tool allows to interpret, read and watch an image (obtained from a url in the param image_url) and \nreturn a string that represents HTML js and CSS",
                     "parameters": {
                         "properties": {
                             "image_url": {

@@ -9,9 +9,8 @@ api_key = os.getenv("OPENAI_API_KEY") # or access_token = os.getenv("MY_ACCESS_T
 
 class ImageToCode(BaseTool):
     """
-    A brief description of what the custom tool does.
-    The docstring should clearly explain the tool's purpose and functionality.
-    It will be used by the agent to determine when to use this tool.
+    This tool allows to interpret, read and watch an image (obtained from a url in the param image_url) and 
+    return a string that represents HTML js and CSS
     """
 
     # Define the fields with descriptions using Pydantic Field
@@ -21,7 +20,7 @@ class ImageToCode(BaseTool):
     
     def run(self):
         """
-        Encodes the local image to base64 and calls the OpenAI API to get code
+        Encodes the image represented in url_image the OpenAI API to get code
         that represents the image (HTML, JavaScript, and CSS).
         """
         

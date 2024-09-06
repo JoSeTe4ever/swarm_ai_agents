@@ -1,0 +1,7 @@
+[
+    {
+        "sender": "UIDesigner",
+        "receiver": "FrontendDeveloperAgent",
+        "message": "Please prepare to convert the upcoming design into HTML, CSS, and JS once it is generated."
+    }
+]

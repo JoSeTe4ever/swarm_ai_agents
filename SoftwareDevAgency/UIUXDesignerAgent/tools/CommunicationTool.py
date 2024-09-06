@@ -10,7 +10,7 @@ meetings_storage_path = "scheduled_meetings.json"
 
 class CommunicationTool(BaseTool):
     """
-    This tool enables the UI/UX Designer Agent to communicate with the CEO, Requirements Analyst, and Developer agents.
+    This tool enables the UI/UX Designer Agent to communicate with the Frontend developer.
     It supports sending and receiving messages, and scheduling meetings or discussions to ensure designs align with project goals.
     """
 
