@@ -1,5 +1,4 @@
-[
-    {
+[{
         "id": "asst_QimGz9k6BqTRd6KoFrVPxqVF",
         "created_at": 1724708974,
         "description": "The CEO agent oversees the entire software development process and coordinates between agents within the SoftwareDevAgency. It ensures seamless communication and collaboration between the Requirements Analyst, UI/UX Designer, and Developer agents.",
@@ -8,81 +7,76 @@
         "model": "gpt-4o-2024-08-06",
         "name": "CEOAgent",
         "object": "assistant",
-        "tools": [
-            {
-                "function": {
-                    "name": "SendMessage",
-                    "description": "Use this tool to facilitate direct, synchronous communication between specialized agents within your agency. When you send a message using this tool, you receive a response exclusively from the designated recipient agent. To continue the dialogue, invoke this tool again with the desired recipient agent and your follow-up message. Remember, communication here is synchronous; the recipient agent won't perform any tasks post-response. You are responsible for relaying the recipient agent's responses back to the user, as the user does not have direct access to these replies. Keep engaging with the tool for continuous interaction until the task is fully resolved. Do not send more than 1 message at a time.",
-                    "parameters": {
-                        "$defs": {
-                            "recipient": {
-                                "enum": [
-                                    "RequirementsAnalystAgent",
-                                    "UIUXDesignerAgent",
-                                    "Devid"
-                                ],
-                                "title": "recipient",
-                                "type": "string"
-                            }
-                        },
-                        "properties": {
-                            "my_primary_instructions": {
-                                "description": "Please repeat your primary instructions step-by-step, including both completed and the following next steps that you need to perform. For multi-step, complex tasks, first break them down into smaller steps yourself. Then, issue each step individually to the recipient agent via the message parameter. Each identified step should be sent in separate message. Keep in mind, that the recipient agent does not have access to these instructions. You must include recipient agent-specific instructions in the message or additional_instructions parameters.",
-                                "title": "My Primary Instructions",
-                                "type": "string"
-                            },
-                            "recipient": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/$defs/recipient"
-                                    }
-                                ],
-                                "description": "RequirementsAnalystAgent: The Requirements Analyst agent is responsible for gathering and analyzing software requirements within the SoftwareDevAgency. It communicates with the CEO and UI/UX Designer agents to ensure accurate and comprehensive requirement analysis.\nUIUXDesignerAgent: The UI/UX Designer agent is responsible for generating innovative and user-friendly UI/UX designs using DALL-E 3 within the SoftwareDevAgency. It collaborates with the CEO, Requirements Analyst, and Developer agents to ensure designs align with project requirements and goals.\nDevid: Devid is an AI software engineer capable of performing advanced coding tasks.\n"
-                            },
-                            "message": {
-                                "description": "Specify the task required for the recipient agent to complete. Focus on clarifying what the task entails, rather than providing exact instructions.",
-                                "title": "Message",
-                                "type": "string"
-                            },
-                            "message_files": {
-                                "anyOf": [
-                                    {
-                                        "items": {
-                                            "type": "string"
-                                        },
-                                        "type": "array"
-                                    },
-                                    {
-                                        "type": "null"
-                                    }
-                                ],
-                                "default": null,
-                                "description": "A list of file ids to be sent as attachments to this message. Only use this if you have the file id that starts with 'file-'.",
-                                "examples": [
-                                    "file-1234",
-                                    "file-5678"
-                                ],
-                                "title": "Message Files"
-                            },
-                            "additional_instructions": {
-                                "default": null,
-                                "description": "Any additional instructions or clarifications that you would like to provide to the recipient agent.",
-                                "title": "Additional Instructions",
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "message",
-                            "my_primary_instructions",
-                            "recipient"
-                        ],
-                        "type": "object"
+        "tools": [{
+            "function": {
+                "name": "SendMessage",
+                "description": "Use this tool to facilitate direct, synchronous communication between specialized agents within your agency. When you send a message using this tool, you receive a response exclusively from the designated recipient agent. To continue the dialogue, invoke this tool again with the desired recipient agent and your follow-up message. Remember, communication here is synchronous; the recipient agent won't perform any tasks post-response. You are responsible for relaying the recipient agent's responses back to the user, as the user does not have direct access to these replies. Keep engaging with the tool for continuous interaction until the task is fully resolved. Do not send more than 1 message at a time.",
+                "parameters": {
+                    "$defs": {
+                        "recipient": {
+                            "enum": [
+                                "RequirementsAnalystAgent",
+                                "UIUXDesignerAgent",
+                                "Devid"
+                            ],
+                            "title": "recipient",
+                            "type": "string"
+                        }
                     },
-                    "strict": false
+                    "properties": {
+                        "my_primary_instructions": {
+                            "description": "Please repeat your primary instructions step-by-step, including both completed and the following next steps that you need to perform. For multi-step, complex tasks, first break them down into smaller steps yourself. Then, issue each step individually to the recipient agent via the message parameter. Each identified step should be sent in separate message. Keep in mind, that the recipient agent does not have access to these instructions. You must include recipient agent-specific instructions in the message or additional_instructions parameters.",
+                            "title": "My Primary Instructions",
+                            "type": "string"
+                        },
+                        "recipient": {
+                            "allOf": [{
+                                "$ref": "#/$defs/recipient"
+                            }],
+                            "description": "RequirementsAnalystAgent: The Requirements Analyst agent is responsible for gathering and analyzing software requirements within the SoftwareDevAgency. It communicates with the CEO and UI/UX Designer agents to ensure accurate and comprehensive requirement analysis.\nUIUXDesignerAgent: The UI/UX Designer agent is responsible for generating innovative and user-friendly UI/UX designs using DALL-E 3 within the SoftwareDevAgency. It collaborates with the CEO, Requirements Analyst, and Developer agents to ensure designs align with project requirements and goals.\nDevid: Devid is an AI software engineer capable of performing advanced coding tasks.\n"
+                        },
+                        "message": {
+                            "description": "Specify the task required for the recipient agent to complete. Focus on clarifying what the task entails, rather than providing exact instructions.",
+                            "title": "Message",
+                            "type": "string"
+                        },
+                        "message_urls": {
+                            "anyOf": [{
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "default": null,
+                            "description": "A list of image URLs to be sent as attachments to this message. Only use this if you have valid URLs that point to images.",
+                            "examples": [
+                                "https://example.com/image1.jpg",
+                                "https://example.com/image2.png"
+                            ],
+                            "title": "Message URLs"
+                        },
+                        "additional_instructions": {
+                            "default": null,
+                            "description": "Any additional instructions or clarifications that you would like to provide to the recipient agent.",
+                            "title": "Additional Instructions",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "message",
+                        "my_primary_instructions",
+                        "recipient"
+                    ],
+                    "type": "object"
                 },
-                "type": "function"
-            }
-        ],
+                "strict": false
+            },
+            "type": "function"
+        }],
         "response_format": "auto",
         "temperature": 0.3,
         "tool_resources": {
@@ -100,8 +94,7 @@
         "model": "gpt-4o-2024-08-06",
         "name": "RequirementsAnalystAgent",
         "object": "assistant",
-        "tools": [
-            {
+        "tools": [{
                 "function": {
                     "name": "CommunicationTool",
                     "description": "This tool enables the Requirements Analyst Agent to communicate with the CEO and UI/UX Designer agents.\nIt supports sending and receiving messages, and scheduling meetings or discussions to gather and verify requirements.",
@@ -258,11 +251,9 @@
                                 "type": "string"
                             },
                             "recipient": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/$defs/recipient"
-                                    }
-                                ],
+                                "allOf": [{
+                                    "$ref": "#/$defs/recipient"
+                                }],
                                 "description": "UIUXDesignerAgent: The UI/UX Designer agent is responsible for generating innovative and user-friendly UI/UX designs using DALL-E 3 within the SoftwareDevAgency. It collaborates with the CEO, Requirements Analyst, and Developer agents to ensure designs align with project requirements and goals.\n"
                             },
                             "message": {
@@ -270,9 +261,8 @@
                                 "title": "Message",
                                 "type": "string"
                             },
-                            "message_files": {
-                                "anyOf": [
-                                    {
+                            "message_urls": {
+                                "anyOf": [{
                                         "items": {
                                             "type": "string"
                                         },
@@ -283,12 +273,12 @@
                                     }
                                 ],
                                 "default": null,
-                                "description": "A list of file ids to be sent as attachments to this message. Only use this if you have the file id that starts with 'file-'.",
+                                "description": "A list of image URLs to be sent as attachments to this message. Only use this if you have valid URLs that point to images.",
                                 "examples": [
-                                    "file-1234",
-                                    "file-5678"
+                                    "https://example.com/image1.jpg",
+                                    "https://example.com/image2.png"
                                 ],
-                                "title": "Message Files"
+                                "title": "Message URLs"
                             },
                             "additional_instructions": {
                                 "default": null,
@@ -326,8 +316,7 @@
         "model": "gpt-4o-2024-08-06",
         "name": "UIUXDesignerAgent",
         "object": "assistant",
-        "tools": [
-            {
+        "tools": [{
                 "function": {
                     "name": "CommunicationTool",
                     "description": "This tool enables the UI/UX Designer Agent to communicate with the CEO, Requirements Analyst, and Developer agents.\nIt supports sending and receiving messages, and scheduling meetings or discussions to ensure designs align with project goals.",
@@ -448,11 +437,9 @@
                                 "type": "string"
                             },
                             "recipient": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/$defs/recipient"
-                                    }
-                                ],
+                                "allOf": [{
+                                    "$ref": "#/$defs/recipient"
+                                }],
                                 "description": "Devid: Devid is an AI software engineer capable of performing advanced coding tasks.\n"
                             },
                             "message": {
@@ -460,9 +447,8 @@
                                 "title": "Message",
                                 "type": "string"
                             },
-                            "message_files": {
-                                "anyOf": [
-                                    {
+                            "message_urls": {
+                                "anyOf": [{
                                         "items": {
                                             "type": "string"
                                         },
@@ -473,12 +459,12 @@
                                     }
                                 ],
                                 "default": null,
-                                "description": "A list of file ids to be sent as attachments to this message. Only use this if you have the file id that starts with 'file-'.",
+                                "description": "A list of image URLs to be sent as attachments to this message. Only use this if you have valid URLs that point to images.",
                                 "examples": [
-                                    "file-1234",
-                                    "file-5678"
+                                    "https://example.com/image1.jpg",
+                                    "https://example.com/image2.png"
                                 ],
-                                "title": "Message Files"
+                                "title": "Message URLs"
                             },
                             "additional_instructions": {
                                 "default": null,
@@ -516,8 +502,7 @@
         "model": "gpt-4o-2024-08-06",
         "name": "Devid",
         "object": "assistant",
-        "tools": [
-            {
+        "tools": [{
                 "type": "file_search",
                 "file_search": null
             },
@@ -541,8 +526,7 @@
                                         "type": "integer"
                                     },
                                     "new_line": {
-                                        "anyOf": [
-                                            {
+                                        "anyOf": [{
                                                 "type": "string"
                                             },
                                             {
@@ -593,13 +577,11 @@
                             },
                             "changes": {
                                 "description": "Line changes to be made to the file.",
-                                "examples": [
-                                    {
-                                        "line_number": 1,
-                                        "mode": "replace",
-                                        "new_line": "This is a new line"
-                                    }
-                                ],
+                                "examples": [{
+                                    "line_number": 1,
+                                    "mode": "replace",
+                                    "new_line": "This is a new line"
+                                }],
                                 "items": {
                                     "$ref": "#/$defs/LineChange"
                                 },
@@ -763,8 +745,7 @@
                                 "type": "string"
                             },
                             "documentation": {
-                                "anyOf": [
-                                    {
+                                "anyOf": [{
                                         "type": "string"
                                     },
                                     {
@@ -869,8 +850,7 @@
         "model": "gpt-4o-2024-08-06",
         "name": "UIDesginer",
         "object": "assistant",
-        "tools": [
-            {
+        "tools": [{
                 "function": {
                     "name": "CommunicationTool",
                     "description": "A tool that allows two agents to communicate by reading and writing messages to a shared JSON file.\nAgents can post a message, read the latest message, and retrieve a history of messages.",
@@ -947,11 +927,9 @@
                                 "type": "string"
                             },
                             "recipient": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/$defs/recipient"
-                                    }
-                                ],
+                                "allOf": [{
+                                    "$ref": "#/$defs/recipient"
+                                }],
                                 "description": "FrontendDeveloperAgent: This agent takes a picture reads it, undestands it, and generate 3 files (html js and css) that represent this image\n"
                             },
                             "message": {
@@ -959,9 +937,8 @@
                                 "title": "Message",
                                 "type": "string"
                             },
-                            "message_files": {
-                                "anyOf": [
-                                    {
+                            "message_urls": {
+                                "anyOf": [{
                                         "items": {
                                             "type": "string"
                                         },
@@ -972,12 +949,12 @@
                                     }
                                 ],
                                 "default": null,
-                                "description": "A list of file ids to be sent as attachments to this message. Only use this if you have the file id that starts with 'file-'.",
+                                "description": "A list of image URLs to be sent as attachments to this message. Only use this if you have valid URLs that point to images.",
                                 "examples": [
-                                    "file-1234",
-                                    "file-5678"
+                                    "https://example.com/image1.jpg",
+                                    "https://example.com/image2.png"
                                 ],
-                                "title": "Message Files"
+                                "title": "Message URLs"
                             },
                             "additional_instructions": {
                                 "default": null,
@@ -1040,8 +1017,7 @@
         "model": "gpt-4o-2024-08-06",
         "name": "FrontendDeveloperAgent",
         "object": "assistant",
-        "tools": [
-            {
+        "tools": [{
                 "function": {
                     "name": "CommunicationTool",
                     "description": "A tool that allows two agents to communicate by reading and writing messages to a shared JSON file.\nAgents can post a message, read the latest message, and retrieve a history of messages.",
