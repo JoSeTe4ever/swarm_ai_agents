@@ -435,7 +435,7 @@
                                 "title": "Message",
                                 "type": "string"
                             },
-                            "message_files": {
+                            "message_urls": {
                                 "anyOf": [{
                                         "items": {
                                             "type": "string"
@@ -447,12 +447,12 @@
                                     }
                                 ],
                                 "default": null,
-                                "description": "A list of file ids to be sent as attachments to this message. Only use this if you have the file id that starts with 'file-'.",
+                                "description": "A list of image URLs to be sent as attachments to this message. Only use this if you have valid URLs that point to images.",
                                 "examples": [
-                                    "file-1234",
-                                    "file-5678"
+                                    "https://example.com/image1.jpg",
+                                    "https://example.com/image2.png"
                                 ],
-                                "title": "Message Files"
+                                "title": "Message URLs"
                             },
                             "additional_instructions": {
                                 "default": null,
