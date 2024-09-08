@@ -10,12 +10,12 @@ api_key = os.getenv("OPENAI_API_KEY") # or access_token = os.getenv("MY_ACCESS_T
 class ImageToCode(BaseTool):
     """
     This tool allows to interpret, read and watch an image (obtained from a url in the param image_url) and 
-    return a string that represents HTML js and CSS
+    return a string that represents HTML js and CSS. Use shared_image_url from shared_state when present.
     """
     
     def run(self):
         """
-        Encodes the image represented in url_image the OpenAI API to get code
+        Encodes the image represented in shared_image_url the OpenAI API to get code
         that represents the image (HTML, JavaScript, and CSS).
         """
         
