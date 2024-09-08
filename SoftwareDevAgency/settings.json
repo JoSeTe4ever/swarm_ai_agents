@@ -1105,17 +1105,9 @@
                     "name": "ImageToCode",
                     "description": "This tool allows to interpret, read and watch an image (obtained from a url in the param image_url) and \nreturn a string that represents HTML js and CSS",
                     "parameters": {
-                        "properties": {
-                            "image_url": {
-                                "description": "url where the image is to be found",
-                                "title": "Image Url",
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "image_url"
-                        ],
-                        "type": "object"
+                        "properties": {},
+                        "type": "object",
+                        "required": []
                     },
                     "strict": false
                 },

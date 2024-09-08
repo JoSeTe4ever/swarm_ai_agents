@@ -37,8 +37,7 @@ fe_developer = FrontendDeveloperAgent()
 #                 )
 
 
-agency = Agency([ui_designer, [fe_developer],
-                 [ui_designer, fe_developer],],
+agency = Agency([ui_designer, [fe_developer]],
                  shared_instructions='./agency_manifesto.md',  # shared instructions for all agents
                  max_prompt_tokens=25000,  # default tokens in conversation for all agents
                  temperature=0.3,  # default temperature for all agents

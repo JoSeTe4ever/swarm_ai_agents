@@ -12,11 +12,6 @@ class ImageToCode(BaseTool):
     This tool allows to interpret, read and watch an image (obtained from a url in the param image_url) and 
     return a string that represents HTML js and CSS
     """
-
-    # Define the fields with descriptions using Pydantic Field
-    image_url: str = Field(
-        ..., description="url where the image is to be found"
-    )
     
     def run(self):
         """
@@ -29,7 +24,9 @@ class ImageToCode(BaseTool):
             "Content-Type": "application/json",
             "Authorization": f"Bearer {api_key}"
         }
-
+        
+        shared_image_url = self._shared_state.get("image_url")
+        print('JOPI -> ' , shared_image_url)
         payload = {
             "model": "gpt-4o-mini",
             "messages": [
@@ -43,7 +40,7 @@ class ImageToCode(BaseTool):
                         {
                             "type": "image_url",
                             "image_url": {
-                                "url": self.image_url
+                                "url": shared_image_url
                             }
                         }
                     ]

@@ -37,6 +37,7 @@ class DesignGenerationTool(BaseTool):
 
             # Extract the URL of the generated image
             image_url = response['data'][0]['url']
+            self._shared_state.set("image_url", image_url)
 
             return f"Design generated successfully. Image URL: {image_url}"
 
