@@ -1,7 +1,7 @@
 {
     "1": {
         "title": "User Login",
-        "description": "The system shall allow users to log in using their email and password.",
+        "description": "The system shall allow users to log in using their email and password. Accordingly.",
         "category": "Authentication",
         "priority": "High"
     }

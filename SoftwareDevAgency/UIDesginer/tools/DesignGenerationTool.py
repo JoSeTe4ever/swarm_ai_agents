@@ -4,6 +4,7 @@ import openai
 import os
 from dotenv import load_dotenv
 
+# this class is used to generate the design using DALL-E 3
 
 # Define a global variable for the OpenAI API key
 load_dotenv()
