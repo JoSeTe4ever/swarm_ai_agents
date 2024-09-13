@@ -5,8 +5,6 @@ from UIUXDesignerAgent import UIUXDesignerAgent
 from RequirementsAnalystAgent import RequirementsAnalystAgent
 from CEOAgent import CEOAgent
 from agency_swarm import set_openai_key
-from UIDesginer import UIDesginer
-from UIDesginer.tools.DesignGenerationTool import  DesignGenerationTool
 from FrontendDeveloperAgent.tools.ImageToCode import  ImageToCode
 
 import os
@@ -22,8 +20,6 @@ set_openai_key(openai_api_key)
 ceo = CEOAgent()
 requirements_analyst = RequirementsAnalystAgent()
 uiux_designer = UIUXDesignerAgent()
-developer = Devid()
-ui_designer = UIDesginer()
 fe_developer = FrontendDeveloperAgent()
 
 # agency = Agency([ceo, [ceo, requirements_analyst],
@@ -37,7 +33,7 @@ fe_developer = FrontendDeveloperAgent()
 #                 )
 
 
-agency = Agency([ui_designer, [fe_developer]],
+agency = Agency([uiux_designer, [uiux_designer, fe_developer]],
                  shared_instructions='./agency_manifesto.md',  # shared instructions for all agents
                  max_prompt_tokens=25000,  # default tokens in conversation for all agents
                  temperature=0.3,  # default temperature for all agents

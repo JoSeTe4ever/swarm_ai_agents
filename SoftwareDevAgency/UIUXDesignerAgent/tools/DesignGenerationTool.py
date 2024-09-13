@@ -29,14 +29,14 @@ class DesignGenerationTool(BaseTool):
 
         try:
             # Generate the design using DALL-E 3
-            response = openai.Image.create(
+            response = openai.images.generate(
                 prompt=self.design_prompt,
                 n=1,
                 size="1024x1024"
             )
 
             # Extract the URL of the generated image
-            image_url = response['data'][0]['url']
+            image_url = response.data[0].url
             self._shared_state.set("image_url", image_url)
 
             return f"Design generated successfully. Image URL: {image_url}"

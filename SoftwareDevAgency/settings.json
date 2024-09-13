@@ -321,7 +321,7 @@
         "id": "asst_4WDI87EMMDoF8alx4aBG89ig",
         "created_at": 1724708974,
         "description": "The UI/UX Designer agent is responsible for generating innovative and user-friendly UI/UX designs using DALL-E 3 within the SoftwareDevAgency. It collaborates with the CEO, Requirements Analyst, and Developer agents to ensure designs align with project requirements and goals.",
-        "instructions": "# SoftwareDevAgency Manifesto\n\n## Mission\nThe SoftwareDevAgency is dedicated to streamlining the software development process by efficiently gathering requirements, creating AI-generated UI/UX designs, and implementing these designs in React. Our goal is to leverage AI technology to enhance creativity and productivity while maintaining high standards of quality.\n\n## Working Environment\nThe agency operates in a collaborative environment where each agent has a distinct role but works together towards a common goal. The CEO agent coordinates all activities and ensures seamless communication between agents.\n\n## Goals\n- Efficiently gather and analyze software requirements.\n- Use AI to generate innovative and user-friendly UI/UX designs.\n- Implement designs in React with precision and efficiency.\n- Foster a collaborative and creative working environment.\n\n# UI/UX Designer Agent Instructions\n\nYou are the UI/UX Designer agent responsible for creating AI-generated UI/UX designs using DALL-E 3 within the SoftwareDevAgency. Your primary role is to transform requirements into visually appealing and user-friendly designs.\n\n### Primary Instructions:\n1. Communicate with the Requirements Analyst agent to understand the detailed software requirements.\n2. Use DALL-E 3 to generate innovative UI/UX designs based on the provided requirements.\n3. Share the generated designs with the Developer agent for implementation in React.\n4. Collaborate with the CEO agent to ensure the designs align with the overall project goals and objectives.\n5. Provide feedback and make necessary adjustments to the designs based on input from the Developer and CEO agents.\n6. Document the design process and decisions for future reference and improvements.\n7. Ensure all designs meet the agency's standards for creativity, usability, and quality.",
+        "instructions": "# SoftwareDevAgency Manifesto\n\n## Mission\nThe SoftwareDevAgency is dedicated to streamlining the software development process by efficiently gathering requirements, creating AI-generated UI/UX designs, and implementing these designs in React. Our goal is to leverage AI technology to enhance creativity and productivity while maintaining high standards of quality.\n\n## Working Environment\nThe agency operates in a collaborative environment where each agent has a distinct role but works together towards a common goal. The UIDesigner agent generates an image and the FrotnendDeveloperAgent takes its and turns in into HTML JS and CSS.\n\n## Goals\n- Use AI to generate innovative and user-friendly UI/UX designs.\n- Implement designs in HTML JS and CSS with precision and efficiency.\n- Foster a collaborative and creative working environment.\n\n# UI/UX Designer Agent Instructions\n\nYou are the UI/UX Designer agent responsible for creating AI-generated UI/UX designs using DALL-E 3 within the SoftwareDevAgency. Your primary role is to transform requirements into visually appealing and user-friendly designs.\n\n### Primary Instructions:\n\n1. Use DALL-E 3 to generate innovative UI/UX designs based on the provided requirements.\n2. Share the generated designs with the Developer agent for implementation using Communication tool. Communicate with the FrontendDevloperAgent.",
         "metadata": {},
         "model": "gpt-4o-2024-08-06",
         "name": "UIUXDesignerAgent",
@@ -330,7 +330,7 @@
             {
                 "function": {
                     "name": "CommunicationTool",
-                    "description": "This tool enables the UI/UX Designer Agent to communicate with the CEO, Requirements Analyst, and Developer agents.\nIt supports sending and receiving messages, and scheduling meetings or discussions to ensure designs align with project goals.",
+                    "description": "This tool enables the UI/UX Designer Agent to communicate with the Frontend developer.\nIt supports sending and receiving messages, and scheduling meetings or discussions to ensure designs align with project goals.",
                     "parameters": {
                         "properties": {
                             "action": {
@@ -433,9 +433,9 @@
                     "parameters": {
                         "$defs": {
                             "recipient": {
-                                "const": "Devid",
+                                "const": "FrontendDeveloperAgent",
                                 "enum": [
-                                    "Devid"
+                                    "FrontendDeveloperAgent"
                                 ],
                                 "title": "recipient",
                                 "type": "string"
@@ -453,14 +453,14 @@
                                         "$ref": "#/$defs/recipient"
                                     }
                                 ],
-                                "description": "Devid: Devid is an AI software engineer capable of performing advanced coding tasks.\n"
+                                "description": "FrontendDeveloperAgent: This agent takes a picture reads it, undestands it, and generate 3 files (html js and css) that represent this image\n"
                             },
                             "message": {
                                 "description": "Specify the task required for the recipient agent to complete. Focus on clarifying what the task entails, rather than providing exact instructions.",
                                 "title": "Message",
                                 "type": "string"
                             },
-                            "message_urls": {
+                            "message_files": {
                                 "anyOf": [
                                     {
                                         "items": {
@@ -473,12 +473,12 @@
                                     }
                                 ],
                                 "default": null,
-                                "description": "A list of image URLs to be sent as attachments to this message. Only use this if you have valid URLs that point to images.",
+                                "description": "A list of file ids to be sent as attachments to this message. Only use this if you have the file id that starts with 'file-'.",
                                 "examples": [
-                                    "https://example.com/image1.jpg",
-                                    "https://example.com/image2.png"
+                                    "file-1234",
+                                    "file-5678"
                                 ],
-                                "title": "Message URLs"
+                                "title": "Message Files"
                             },
                             "additional_instructions": {
                                 "default": null,
@@ -862,7 +862,7 @@
         "id": "asst_lQ7QHVWYpoMImEPIqtjfu8Vq",
         "created_at": 1724777826,
         "description": "This agent will create a UI design using templates supplied",
-        "instructions": "# SoftwareDevAgency Manifesto\n\n## Mission\nThe SoftwareDevAgency is dedicated to streamlining the software development process by efficiently gathering requirements, creating AI-generated UI/UX designs, and implementing these designs in React. Our goal is to leverage AI technology to enhance creativity and productivity while maintaining high standards of quality.\n\n## Working Environment\nThe agency operates in a collaborative environment where each agent has a distinct role but works together towards a common goal. The UIDesigner agent generates an image and the FrotnendDeveloperAgent takes its and turns in into HTML JS and CSS.\n\n## Goals\n- Use AI to generate innovative and user-friendly UI/UX designs.\n- Implement designs in HTML JS and CSS with precision and efficiency.\n- Foster a collaborative and creative working environment.\n\n# UIDesginer Instructions\n\nYou are the UI/UX Designer agent responsible for creating AI-generated UI/UX designs using DALL-E 3 within the SoftwareDevAgency. Your primary role is to transform requirements into visually appealing and user-friendly designs.\n\n### Primary Instructions:\n1. Communicate with the Requirements Analyst agent to understand the detailed software requirements.\n2. Use DALL-E 3 to generate innovative UI/UX designs based on the provided requirements.Create a modern website mockup for a BASF website with emphasis on functionality\n3. Share the generated designs with the Developer agent for implementation through a file.",
+        "instructions": "# SoftwareDevAgency Manifesto\n\n## Mission\nThe SoftwareDevAgency is dedicated to streamlining the software development process by efficiently gathering requirements, creating AI-generated UI/UX designs, and implementing these designs in React. Our goal is to leverage AI technology to enhance creativity and productivity while maintaining high standards of quality.\n\n## Working Environment\nThe agency operates in a collaborative environment where each agent has a distinct role but works together towards a common goal. The UIDesigner agent generates an image and the FrotnendDeveloperAgent takes its and turns in into HTML JS and CSS.\n\n## Goals\n- Use AI to generate innovative and user-friendly UI/UX designs.\n- Implement designs in HTML JS and CSS with precision and efficiency.\n- Foster a collaborative and creative working environment.\n\n# UIDesginer Instructions\n\nYou are the UI/UX Designer agent responsible for creating AI-generated UI/UX designs using DALL-E 3 within the SoftwareDevAgency. Your primary role is to transform requirements into visually appealing and user-friendly designs.\n\n### Primary Instructions:\n1. Communicate with the Requirements Analyst agent to understand the detailed software requirements.\n2. Use DALL-E 3 to generate innovative UI/UX designs based on the provided requirements.Create a modern website mockup for a BASF website with emphasis on functionality\n4. Do not try to attach any files to messages, they are stored locally and agents already have access to them",
         "metadata": {},
         "model": "gpt-4o-2024-08-06",
         "name": "UIDesginer",
@@ -1065,32 +1065,6 @@
                             "message",
                             "receiver",
                             "sender"
-                        ],
-                        "type": "object"
-                    },
-                    "strict": false
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "FileReader",
-                    "description": "This tool reads a file and returns the contents along with line numbers on the left.",
-                    "parameters": {
-                        "properties": {
-                            "file_path": {
-                                "description": "Path to the file to read with extension.",
-                                "examples": [
-                                    "./file.txt",
-                                    "./file.json",
-                                    "../../file.py"
-                                ],
-                                "title": "File Path",
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "file_path"
                         ],
                         "type": "object"
                     },
