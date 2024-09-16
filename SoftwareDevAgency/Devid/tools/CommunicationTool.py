@@ -10,7 +10,7 @@ meetings_storage_path = "scheduled_meetings.json"
 
 class CommunicationTool(BaseTool):
     """
-    This tool enables the UI/UX Designer Agent to communicate with the Frontend developer.
+    This tool enables the Devid to communicate with the Frontend developer and any other agent.
     It supports sending and receiving messages, and scheduling meetings or discussions to ensure designs align with project goals.
     """
 
@@ -32,7 +32,7 @@ class CommunicationTool(BaseTool):
         The implementation of the run method, where the tool's main functionality is executed.
         This method should utilize the fields defined above to perform the task.
         """
-        valid_recipients = ['Frontend Developer', 'UI/UX Designer']
+        valid_recipients = ['Frontend Developer', 'UI/UX Designer', 'CEO', 'Requirements Analyst', 'Backend Developer']
 
         if self.action not in ['send_message', 'receive_messages', 'schedule_meeting']:
             return "Invalid action. Please specify 'send_message', 'receive_messages', or 'schedule_meeting'."

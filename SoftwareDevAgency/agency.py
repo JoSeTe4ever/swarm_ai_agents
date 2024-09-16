@@ -21,6 +21,7 @@ ceo = CEOAgent()
 requirements_analyst = RequirementsAnalystAgent()
 uiux_designer = UIUXDesignerAgent()
 fe_developer = FrontendDeveloperAgent()
+david_developer = Devid()
 
 # agency = Agency([ceo, [ceo, requirements_analyst],
 #                  [ceo, uiux_designer],
@@ -33,7 +34,8 @@ fe_developer = FrontendDeveloperAgent()
 #                 )
 
 
-agency = Agency([uiux_designer, [uiux_designer, fe_developer]],
+agency = Agency([uiux_designer, [uiux_designer, fe_developer],
+                 [fe_developer, david_developer]],
                  shared_instructions='./agency_manifesto.md',  # shared instructions for all agents
                  max_prompt_tokens=25000,  # default tokens in conversation for all agents
                  temperature=0.3,  # default temperature for all agents

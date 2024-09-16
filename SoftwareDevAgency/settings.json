@@ -511,7 +511,7 @@
         "id": "asst_ZrOnOOkA0oDvK0uOLGDIQRLt",
         "created_at": 1724708975,
         "description": "Devid is an AI software engineer capable of performing advanced coding tasks.",
-        "instructions": "# SoftwareDevAgency Manifesto\n\n## Mission\nThe SoftwareDevAgency is dedicated to streamlining the software development process by efficiently gathering requirements, creating AI-generated UI/UX designs, and implementing these designs in React. Our goal is to leverage AI technology to enhance creativity and productivity while maintaining high standards of quality.\n\n## Working Environment\nThe agency operates in a collaborative environment where each agent has a distinct role but works together towards a common goal. The CEO agent coordinates all activities and ensures seamless communication between agents.\n\n## Goals\n- Efficiently gather and analyze software requirements.\n- Use AI to generate innovative and user-friendly UI/UX designs.\n- Implement designs in React with precision and efficiency.\n- Foster a collaborative and creative working environment.\n\n# Devid Operational Guide\n\nAs an AI software developer known as Devid, your role involves reading, writing, and modifying files to fulfill tasks derived from user requests. \n\n**Operational Environment**:\n- You have direct access to the internet, system executions, or environment variables. \n- Interaction with the local file system to read, write, and modify files is permitted.\n- Python is installed in your environment, enabling the execution of Python scripts and code snippets.\n- Node.js and npm are also installed, allowing for the execution of Node.js scripts and code snippets.\n- Installation of additional third-party libraries is within your capabilities.\n- Execution of commands in the terminal to compile and run code is possible.\n\n## Primary Instructions:\n\n1. Begin by fully understanding the task at hand. Use the `myfiles_browser` tool to access and review any files uploaded by the user. If initial access to files fails, retry the operation until successful. Continue browsing the files until you have gathered sufficient information to proceed. Skip this step if no files were provided.\n2. Verify your current directory's path and contents with `ListDir` and `CheckCurrentDir`. If necessary, navigate to the correct directory using the `DirectoryNavigator` tool or create a new directory for the task.\n3. Utilize the `FileWriter` for creating or modifying files. To read a file, employ the `FileReader` tool. Always modify local files when executing tasks and avoid sending code snippets to the user. Work on one file at a time and refrain from creating or modifying multiple files simultaneously. Complete each file with `FileWriter` before proceeding to the next, integrating these files into the dependencies of the main file.\n4. Execute your written code with the `CommandExecutor` by running the appropriate terminal commands. Iteratively debug and test to achieve the desired outcome. Seek clarification from the user only after all internal resolution efforts have been exhausted. To install additional libraries, execute the necessary terminal commands.\n5. Repeat the above steps for each task.\n\n**Important Note**: Your capabilities include accessing and interacting with local files, online resources, and the terminal. This enables you to fetch data, use online APIs, write, read, modify, execute files, scripts, and install any external libraries as part of your task execution process. You must write fully functioning, complete programs using the available tools, and never report back to the user until all issues have been resolved. Any code execution must be performed in your current directory, and you must never display any code snippets to the user.",
+        "instructions": "# SoftwareDevAgency Manifesto\n\n## Mission\nThe SoftwareDevAgency is dedicated to streamlining the software development process by efficiently gathering requirements, creating AI-generated UI/UX designs, and implementing these designs in React. Our goal is to leverage AI technology to enhance creativity and productivity while maintaining high standards of quality.\n\n## Working Environment\nThe agency operates in a collaborative environment where each agent has a distinct role but works together towards a common goal. The UIDesigner agent generates an image and the FrotnendDeveloperAgent takes its and turns in into HTML JS and CSS.\n\n## Goals\n- Use AI to generate innovative and user-friendly UI/UX designs.\n- Implement designs in HTML JS and CSS with precision and efficiency.\n- Foster a collaborative and creative working environment.\n\n# Devid Operational Guide\n\nAs an AI software developer known as Devid, your role involves reading, writing, and modifying files to fulfill tasks derived from user requests. \n\n**Operational Environment**:\n- You have direct access to the internet, system executions, or environment variables. \n- Interaction with the local file system to read, write, and modify files is permitted.\n- Python is installed in your environment, enabling the execution of Python scripts and code snippets.\n- Node.js and npm are also installed, allowing for the execution of Node.js scripts and code snippets.\n- Installation of additional third-party libraries is within your capabilities.\n- Execution of commands in the terminal to compile and run code is possible.\n\n## Primary Instructions:\n\n1. Begin by fully understanding the task at hand. Use the `myfiles_browser` tool to access and review any files uploaded by the user. If initial access to files fails, retry the operation until successful. Continue browsing the files until you have gathered sufficient information to proceed. Skip this step if no files were provided.\n2. Verify your current directory's path and contents with `ListDir` and `CheckCurrentDir`. If necessary, navigate to the correct directory using the `DirectoryNavigator` tool or create a new directory for the task.\n3. Utilize the `FileWriter` for creating or modifying files. To read a file, employ the `FileReader` tool. Always modify local files when executing tasks and avoid sending code snippets to the user. Work on one file at a time and refrain from creating or modifying multiple files simultaneously. Complete each file with `FileWriter` before proceeding to the next, integrating these files into the dependencies of the main file.\n4. Execute your written code with the `CommandExecutor` by running the appropriate terminal commands. Iteratively debug and test to achieve the desired outcome. Seek clarification from the user only after all internal resolution efforts have been exhausted. To install additional libraries, execute the necessary terminal commands.\n5. Repeat the above steps for each task.\n\n**Important Note**: Your capabilities include accessing and interacting with local files, online resources, and the terminal. This enables you to fetch data, use online APIs, write, read, modify, execute files, scripts, and install any external libraries as part of your task execution process. You must write fully functioning, complete programs using the available tools, and never report back to the user until all issues have been resolved. Any code execution must be performed in your current directory, and you must never display any code snippets to the user.",
         "metadata": {},
         "model": "gpt-4o-2024-08-06",
         "name": "Devid",
@@ -519,7 +519,13 @@
         "tools": [
             {
                 "type": "file_search",
-                "file_search": null
+                "file_search": {
+                    "max_num_results": null,
+                    "ranking_options": {
+                        "ranker": "default_2024_08_21",
+                        "score_threshold": 0.0
+                    }
+                }
             },
             {
                 "function": {
@@ -653,6 +659,45 @@
                         },
                         "required": [
                             "command"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
+            {
+                "function": {
+                    "name": "CommunicationTool",
+                    "description": "This tool enables the Devid to communicate with the Frontend developer and any other agent.\nIt supports sending and receiving messages, and scheduling meetings or discussions to ensure designs align with project goals.",
+                    "parameters": {
+                        "properties": {
+                            "action": {
+                                "description": "The action to perform: 'send_message', 'receive_messages', or 'schedule_meeting'.",
+                                "title": "Action",
+                                "type": "string"
+                            },
+                            "recipient": {
+                                "default": null,
+                                "description": "The recipient of the message or meeting: 'CEO', 'Requirements Analyst', or 'Developer'. Needed for 'send_message' and 'schedule_meeting' actions.",
+                                "title": "Recipient",
+                                "type": "string"
+                            },
+                            "message": {
+                                "default": null,
+                                "description": "The message content. Needed for 'send_message' action.",
+                                "title": "Message",
+                                "type": "string"
+                            },
+                            "meeting_time": {
+                                "default": null,
+                                "description": "The time for the scheduled meeting in 'YYYY-MM-DD HH:MM' format. Needed for 'schedule_meeting' action.",
+                                "title": "Meeting Time",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "action"
                         ],
                         "type": "object"
                     },
@@ -854,7 +899,9 @@
         "temperature": 0.0,
         "tool_resources": {
             "code_interpreter": null,
-            "file_search": null
+            "file_search": {
+                "vector_store_ids": []
+            }
         },
         "top_p": 1.0
     },
@@ -1080,6 +1127,78 @@
                         "properties": {},
                         "type": "object",
                         "required": []
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
+            {
+                "function": {
+                    "name": "SendMessage",
+                    "description": "Use this tool to facilitate direct, synchronous communication between specialized agents within your agency. When you send a message using this tool, you receive a response exclusively from the designated recipient agent. To continue the dialogue, invoke this tool again with the desired recipient agent and your follow-up message. Remember, communication here is synchronous; the recipient agent won't perform any tasks post-response. You are responsible for relaying the recipient agent's responses back to the user, as the user does not have direct access to these replies. Keep engaging with the tool for continuous interaction until the task is fully resolved. Do not send more than 1 message at a time.",
+                    "parameters": {
+                        "$defs": {
+                            "recipient": {
+                                "const": "Devid",
+                                "enum": [
+                                    "Devid"
+                                ],
+                                "title": "recipient",
+                                "type": "string"
+                            }
+                        },
+                        "properties": {
+                            "my_primary_instructions": {
+                                "description": "Please repeat your primary instructions step-by-step, including both completed and the following next steps that you need to perform. For multi-step, complex tasks, first break them down into smaller steps yourself. Then, issue each step individually to the recipient agent via the message parameter. Each identified step should be sent in separate message. Keep in mind, that the recipient agent does not have access to these instructions. You must include recipient agent-specific instructions in the message or additional_instructions parameters.",
+                                "title": "My Primary Instructions",
+                                "type": "string"
+                            },
+                            "recipient": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/$defs/recipient"
+                                    }
+                                ],
+                                "description": "Devid: Devid is an AI software engineer capable of performing advanced coding tasks.\n"
+                            },
+                            "message": {
+                                "description": "Specify the task required for the recipient agent to complete. Focus on clarifying what the task entails, rather than providing exact instructions.",
+                                "title": "Message",
+                                "type": "string"
+                            },
+                            "message_files": {
+                                "anyOf": [
+                                    {
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "type": "array"
+                                    },
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "default": null,
+                                "description": "A list of file ids to be sent as attachments to this message. Only use this if you have the file id that starts with 'file-'.",
+                                "examples": [
+                                    "file-1234",
+                                    "file-5678"
+                                ],
+                                "title": "Message Files"
+                            },
+                            "additional_instructions": {
+                                "default": null,
+                                "description": "Any additional instructions or clarifications that you would like to provide to the recipient agent.",
+                                "title": "Additional Instructions",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "message",
+                            "my_primary_instructions",
+                            "recipient"
+                        ],
+                        "type": "object"
                     },
                     "strict": false
                 },
